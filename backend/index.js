@@ -5,8 +5,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 const { Pool } = pkg;
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -22,14 +22,11 @@ const pool = new Pool({
 
 /* ------------------ MIDDLEWARE ------------------ */
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "frontend")));
+
+/* Serve React build folder in production */
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 /* ------------------ ROUTES ------------------ */
-
-// Home page (HTML)
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend", "index.html"));
-});
 
 // API route (JSON)
 app.get("/api/messages", async (req, res) => {
@@ -42,6 +39,11 @@ app.get("/api/messages", async (req, res) => {
     console.error("Database error:", err);
     res.status(500).json({ error: "Database query failed" });
   }
+});
+
+/* Catch-all to serve React in production */
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
 
 /* ------------------ START SERVER ------------------ */
