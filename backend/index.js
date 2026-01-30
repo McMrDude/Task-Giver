@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 /* ------------------ MIDDLEWARE ------------------ */
-app.use(express.json());
+app.use(express.json()); 
 
 /* Serve React build folder in production */
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
