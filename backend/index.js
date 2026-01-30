@@ -35,6 +35,7 @@ app.get("/api/messages", async (req, res) => {
       "SELECT * FROM messages ORDER BY created_at DESC"
     );
     res.json(result.rows);
+    print(result);
   } catch (err) {
     console.error("Database error:", err);
     res.status(500).json({ error: "Database query failed" });
