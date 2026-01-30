@@ -3,6 +3,8 @@ import pkg from "pg";
 import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
+import cors from "cors";
+app.use(cors());
 
 dotenv.config();
 const { Pool } = pkg;
@@ -42,7 +44,6 @@ app.get("/api/messages", async (req, res) => {
       "SELECT * FROM messages ORDER BY created_at DESC"
     );
     res.json(result.rows);
-    print(result);
   } catch (err) {
     console.error("Database error:", err);
     res.status(500).json({ error: "Database query failed" });
