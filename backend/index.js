@@ -4,13 +4,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cors from "cors";
-app.use(cors());
 
 dotenv.config();
 const { Pool } = pkg;
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 /* ----------- FIX __dirname FOR ES MODULES ----------- */
 const __filename = fileURLToPath(import.meta.url);
