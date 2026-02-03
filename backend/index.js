@@ -75,9 +75,7 @@ app.post("/register", async (req, res) => {
       [name, email, hash]
     );
 
-    req.session.user = result.rows[0];
-
-    res.json({ message: "Registered successfully", user: req.session.user });
+    res.json({ message: "Registered successfully", user: result.rows[0] });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Registration failed" });
