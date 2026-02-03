@@ -63,7 +63,7 @@ app.post("/register", async (req, res) => {
 
     const exists = await pool.query("SELECT id FROM users WHERE email=$1", [email]);
     if (exists.rows.length > 0) {
-      return res.status(400).json({ error: "Email already registered" });
+      return res.status(400).json({ error: "Email already registered, login instead" });
     }
 
     const hash = await bcrypt.hash(password, 10);
