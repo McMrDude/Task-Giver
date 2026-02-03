@@ -11,7 +11,7 @@ export default function Register() {
     setMsg('')
 
     try {
-      const res = await fetch('/api/users', {
+      const res = await fetch('/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
