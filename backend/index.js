@@ -51,6 +51,65 @@ app.get("/api/messages", async (req, res) => {
   }
 });
 
+// Create a new user (example)
+app.post("/register", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: "All fields required" });
+    }
+
+    const exists = await pool.query("SELECT id FROM users WHERE email=$1", [email]);
+    if (exists.rows.length > 0) {
+      return res.status(400).json({ error: "Email already registered" });
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+
+    const result = await pool.query(
+      `INSERT INTO users (name, email, password_hash, created_at)
+       VALUES ($1, $2, $3, $4, NOW())
+       RETURNING id, name, email`,
+      [name, email, hash, "student"]
+    );
+
+    req.session.user = result.rows[0];
+
+    res.json({ message: "Registered successfully", user: req.session.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Registration failed" });
+  }
+});
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const result = await pool.query("SELECT * FROM users WHERE email=$1", [email]);
+    if (result.rows.length === 0) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    const user = result.rows[0];
+    const valid = await bcrypt.compare(password, user.password_hash);
+    if (!valid) {
+      return res.status(400).json({ error: "Invalid credentials" });
+    }
+
+    req.session.user = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+    };
+
+    res.json({ message: "Logged in", user: req.session.user });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Login failed" });
+  }
+});
+
 /* Catch-all to serve React in production */
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
