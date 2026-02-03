@@ -7,6 +7,7 @@ export default function Register() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [msg, setMsg] = useState('')
+  const [showMain, setShowMain] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,10 +36,14 @@ export default function Register() {
     }
   }
 
+  if (showMain) {
+    return <App />
+  }
+
   return (
     <div style={{ padding: '20px' }}>
       <button
-        onClick={() => navigate('/')}
+        onClick={() => setShowMain(true)}
         style={{
           position: 'absolute',
           top: '10px',
