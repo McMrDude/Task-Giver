@@ -4,6 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cors from "cors";
+import bcrypt from "bcrypt";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -69,9 +70,9 @@ app.post("/register", async (req, res) => {
 
     const result = await pool.query(
       `INSERT INTO users (name, email, password_hash, created_at)
-       VALUES ($1, $2, $3, $4, NOW())
+       VALUES ($1, $2, $3, NOW())
        RETURNING id, name, email`,
-      [name, email, hash, "student"]
+      [name, email, hash]
     );
 
     req.session.user = result.rows[0];
