@@ -1,6 +1,8 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Register() {
+  const navigate = useNavigate()
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -35,6 +37,24 @@ export default function Register() {
 
   return (
     <div style={{ padding: '20px' }}>
+      <button
+        onClick={() => navigate('/')}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+          padding: '10px 20px',
+          backgroundColor: '#007bff',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          fontSize: '16px'
+        }}
+      >
+        ← Back
+      </button>
+
       <h2>Create account</h2>
 
       <form onSubmit={handleSubmit}>
