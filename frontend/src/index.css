@@ -68,12 +68,11 @@ button:focus-visible {
 /* Gradient layer behind the button. We animate opacity for a smooth transition. */
 .backWrap::before {
   content: '';
-  position: absolute;
   inset: 0; /* cover the wrapper area including padding (the border area) */
   background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
   border-radius: 9px;
   opacity: 0; /* hidden by default */
-  transition: opacity 0.28s ease;
+  transition: opacity 0.1s ease;
   pointer-events: none; /* don't interfere with clicks */
   z-index: -1;
 }
