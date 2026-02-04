@@ -79,6 +79,7 @@ button:focus-visible {
 /* on hover, fade in background and slightly scale it up to give depth */
 .backWrap:hover .bgButton {
   opacity: 1;
+  transform: scale(1.03);
 }
 
 .backButton {
@@ -96,9 +97,7 @@ button:focus-visible {
 }
 
 /* shrink main button slightly on hover so bg shows around edges */
-.backWrap:hover .backButton {
-  transform: scale(0.96);
-}
+
 /* Gradient layer behind the button. We animate opacity for a smooth transition. */
 .backWrap::before {
   content: '';
@@ -115,7 +114,7 @@ button:focus-visible {
 /* Fade the gradient in on hover */
 .backWrap:hover::before {
   opacity: 1;
- }
+}
 
 @media (prefers-color-scheme: light) {
   :root {
