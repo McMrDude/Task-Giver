@@ -79,7 +79,6 @@ button:focus-visible {
 /* on hover, fade in background and slightly scale it up to give depth */
 .backWrap:hover .bgButton {
   opacity: 1;
-  transform: scale(1.03);
 }
 
 .backButton {
@@ -117,17 +116,6 @@ button:focus-visible {
 .backWrap:hover::before {
   opacity: 1;
  }
- 
-.backButton {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-}
 
 @media (prefers-color-scheme: light) {
   :root {
