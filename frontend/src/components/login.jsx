@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './style.css';
 
 export default function Login() {
   // State for form inputs - useState creates a variable and a function to update it
