@@ -37,11 +37,9 @@ export default function Register() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <div className="backWrap">
-        <button className="backButton" onClick={() => navigate('/')}>
-          ← Back
-        </button>
-      </div>
+      <button className="backButton" onClick={() => navigate('/')}>
+        ← Back
+      </button>
 
       <h2>Create account</h2>
 

@@ -53,17 +53,6 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-
-.backWrap {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 4px; /* space used as the "border" area */
-  border-radius: 9px;
-  background: transparent; /* keep empty; gradient lives in ::before */
-  display: inline-block;
-  position: relative;
-}
  
 .backButton {
   display: inline-block;

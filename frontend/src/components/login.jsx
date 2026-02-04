@@ -46,13 +46,12 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="backWrap">
-        <button
-          onClick={() => navigate('/')}
-        >
-          ← Back
-        </button>
-      </div>
+      <button
+        onClick={() => navigate('/')}
+      >
+        ← Back
+      </button>
+      
 
       <h2>Login</h2>
 
