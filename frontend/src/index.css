@@ -83,6 +83,7 @@ button:focus-visible {
 .backButton::after {
   content: '';
   position: absolute;
+  opacity: 0;
   height: 102%;
   width: 102%;
   border-radius: 6px;
