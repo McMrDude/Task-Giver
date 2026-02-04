@@ -85,6 +85,7 @@ button:focus-visible {
 
 .backButton:hover::before {
   opacity: 1; /* Fade in the gradient on hover */
+  z-index: 0;
 }
 
 @media (prefers-color-scheme: light) {
