@@ -30,39 +30,32 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-.backButton {
+.backWrap {
   position: absolute;
   top: 10px;
   left: 10px;
+  padding: 3px; /* space used as the "border" */
+  border-radius: 8px;
+  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+  /* hidden by default (transparent border) */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  display: inline-block;
+}
+
+.backWrap:hover {
+  opacity: 1; /* reveal gradient border on hover */
+}
+
+.backButton {
+  display: inline-block;
   padding: 10px 20px;
   background-color: #007bff;
   color: white;
-  border: 3px solid transparent;
+  border: none;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
   cursor: pointer;
   font-size: 16px;
   position: relative;
