@@ -60,15 +60,27 @@ button:focus-visible {
   left: 10px;
   padding: 4px; /* space used as the "border" area */
   border-radius: 9px;
-  background: transparent; /* hidden by default */
-  transition: background 5.25s ease;
+  background: transparent; /* keep empty; gradient lives in ::before */
   display: inline-block;
+  position: relative;
 }
 
-/* On hover, reveal the gradient in the wrapper's background. The inner button
-   has its own background so it stays blue while the wrapper provides a border */
-.backWrap:hover {
+/* Gradient layer behind the button. We animate opacity for a smooth transition. */
+.backWrap::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* cover the wrapper area including padding (the border area) */
   background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+  border-radius: 9px;
+  opacity: 0; /* hidden by default */
+  transition: opacity 0.28s ease;
+  pointer-events: none; /* don't interfere with clicks */
+  z-index: 0;
+}
+
+/* Fade the gradient in on hover */
+.backWrap:hover::before {
+  opacity: 1;
  }
  
 .backButton {
