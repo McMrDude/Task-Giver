@@ -58,13 +58,48 @@ button:focus-visible {
   position: absolute;
   top: 10px;
   left: 10px;
-  padding: 4px; /* space used as the "border" area */
+  padding: 0; /* bgButton will match actual button size */
   border-radius: 9px;
-  background: transparent; /* keep empty; gradient lives in ::before */
   display: inline-block;
   position: relative;
 }
 
+/* background element directly behind the button (same size) */
+.bgButton {
+  position: absolute;
+  inset: 0; /* match wrapper area */
+  border-radius: 6px;
+  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+  opacity: 0;
+  transition: opacity 0.28s cubic-bezier(.2,.9,.2,1), transform 0.28s cubic-bezier(.2,.9,.2,1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* on hover, fade in background and slightly scale it up to give depth */
+.backWrap:hover .bgButton {
+  opacity: 1;
+  transform: scale(1.03);
+}
+
+.backButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  position: relative; /* put above the bgButton */
+  z-index: 1;
+  transition: transform 0.18s cubic-bezier(.2,.9,.2,1);
+}
+
+/* shrink main button slightly on hover so bg shows around edges */
+.backWrap:hover .backButton {
+  transform: scale(0.96);
+}
 /* Gradient layer behind the button. We animate opacity for a smooth transition. */
 .backWrap::before {
   content: '';
