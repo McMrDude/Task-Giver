@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: task-giver-frontend
+    runtime: node
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm run preview
+    envVars:
+      - key: NODE_ENV
+        value: production
+    routes:
+      - path: /
+        destination: /
+        source: frontend/dist
