@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './style.css';
 
-function Login() {
+export default function Login() {
   // State for form inputs - useState creates a variable and a function to update it
   const [email, setEmail] = useState(''); // stores the email value
   const [password, setPassword] = useState(''); // stores the password value
