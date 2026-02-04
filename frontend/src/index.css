@@ -73,11 +73,10 @@ button:focus-visible {
 .backButton::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+  top: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #21ff08, #ff0000, #fffb00);
   border-radius: 5px;
   opacity: 0; /* Transparent by default */
   transition: opacity 0.3s ease;
