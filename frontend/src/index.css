@@ -61,7 +61,7 @@ button:focus-visible {
   padding: 4px; /* space used as the "border" area */
   border-radius: 9px;
   background: transparent; /* hidden by default */
-  transition: background 0.25s ease;
+  transition: background 5.25s ease;
   display: inline-block;
 }
 
