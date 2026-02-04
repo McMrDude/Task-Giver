@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './style.css';
 
 export default function Login() {
@@ -7,6 +8,7 @@ export default function Login() {
   const [password, setPassword] = useState(''); // stores the password value
   const [message, setMessage] = useState(''); // stores success/error messages
   const [loading, setLoading] = useState(false); // tracks if request is in progress
+  const navigate = useNavigate(); // hook to programmatically navigate between routes
 
   // Handle form submission
   const handleSubmit = async (e) => {
