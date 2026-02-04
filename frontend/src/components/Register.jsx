@@ -95,7 +95,7 @@ export default function Register() {
       <p id="msg">{msg}</p>
 
       <p>
-        Already have an account? <a href="/login.html">Login</a>
+        Already have an account? <a href="/login">Login</a>
       </p>
     </div>
   )
