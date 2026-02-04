@@ -75,7 +75,7 @@ button:focus-visible {
   opacity: 0; /* hidden by default */
   transition: opacity 0.28s ease;
   pointer-events: none; /* don't interfere with clicks */
-  z-index: 0;
+  z-index: -1;
 }
 
 /* Fade the gradient in on hover */
