@@ -48,18 +48,7 @@ export default function Login() {
     <div className="login-container">
       <button
         onClick={() => navigate('/')}
-        style={{
-          position: 'absolute',
-          top: '10px',
-          left: '10px',
-          padding: '10px 20px',
-          backgroundColor: '#007bff',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          fontSize: '16px'
-        }}
+        className='backButton'
       >
         ← Back
       </button>
