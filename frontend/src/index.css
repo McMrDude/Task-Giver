@@ -67,7 +67,9 @@ button:focus-visible {
   font-size: 16px;
 }
 .backButton:hover {
-  border-color: rgb(79, 0, 79);
+  background-image: linear-gradient(to right, #eca0ff, #af00a4); /* The gradient */
+  background-origin: border-box; /* The gradient starts from the outer edge of the border */
+  background-clip: padding-box, border-box; /* The background image is clipped to the padding box, masking the gradient below */
 }
 
 @media (prefers-color-scheme: light) {
