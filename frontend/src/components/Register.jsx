@@ -38,7 +38,6 @@ export default function Register() {
   return (
     <div style={{ padding: '20px' }}>
       <div className="backWrap">
-        <span className="bgButton" aria-hidden="true"></span>
         <button className="backButton" onClick={() => navigate('/')}>
           ← Back
         </button>

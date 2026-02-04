@@ -47,8 +47,9 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="backWrap">
-        <span className="bgButton" aria-hidden="true"></span>
-        <button className="backButton" onClick={() => navigate('/')}>
+        <button
+          onClick={() => navigate('/')}
+        >
           ← Back
         </button>
       </div>
