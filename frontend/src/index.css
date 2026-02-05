@@ -63,13 +63,13 @@ button:focus-visible {
   position: relative;
   padding: 2px;
   border-radius: 9px;
-  background: none;
+  background-color: none;
   display: inline-block;
-  transition: 0.1s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .backWrap:hover {
-  background: linear-gradient(to bottom right, #008cff, #e100ff);
+  background-color: linear-gradient(to bottom right, #008cff, #e100ff);
 }
  
 .backButton,
