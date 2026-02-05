@@ -95,7 +95,7 @@ button:focus-visible {
 }
 .backButton:hover::after {
   opacity: 1;
-  transform: scale(1.01);
+  transform: scale(2);
 }
 
 @media (prefers-color-scheme: light) {
