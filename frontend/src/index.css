@@ -80,10 +80,6 @@ button:focus-visible {
   transition: transform 0.1s ease-in-out;
 }
 
-.backButton:hover {
-  transform: scale(0.99);
-}
-
 .backButton::after {
   content: '';
   position: absolute;
