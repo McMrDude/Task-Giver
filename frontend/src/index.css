@@ -1,3 +1,7 @@
+html, body {
+  background-color: #171717;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -28,7 +32,6 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #171717;
 }
 
 h1 {
