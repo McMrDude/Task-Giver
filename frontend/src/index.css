@@ -77,22 +77,27 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease-in-out;
+  transition: height 0.1s ease-in-out, width 0.1s ease-in-out;
+}
+
+.backButton:hover {
+  height: 99%;
+  width: 99%;
 }
 
 .backButton::after {
   content: '';
   position: absolute;
   opacity: 0;
-  height: 101%;
-  width: 101%;
   border-radius: 6px;
   background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #ff6ec4);
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.1s ease-in-out;
   z-index: -1;
 }
 .backButton:hover::after {
   opacity: 1;
+  height: 101%;
+  width: 101%;
 }
 
 @media (prefers-color-scheme: light) {
