@@ -73,44 +73,25 @@ button:focus-visible {
 }
 
 .backWrap {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  padding: 4px; /* space used as the "border" area */
-  border-radius: 9px;
-  background: transparent; /* keep empty; gradient lives in ::before */
-  display: inline-block;
   position: relative;
-}
- 
-.backButton {
+  padding: 4px;
+  border-radius: 9px;
+  background: linear-gradient(to bottom right, #008cff, #e100ff);
   display: inline-block;
-  padding: 10px 20px;
-  background-color: #000000;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.1s ease-in-out;
 }
 
-.backButton::after {
-  content: '';
-  position: absolute;
-  opacity: 0;
-  height: 90%;
-  width: 96%;
-  border-radius: 6px;
-  background: linear-gradient(to bottom right, #008cff, #e100ff);
-  transition: opacity 0.1s ease-in-out;
-  z-index: -1;
+.backWrap:hover {
+  filter: brightness(1.15);
 }
-.backButton:hover::after {
-  opacity: 1;
+ 
+.backButton,
+.backWrap > button {
+  position: relative;
+  background-color: #000;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  z-index: 1;
 }
 
 @media (prefers-color-scheme: light) {
