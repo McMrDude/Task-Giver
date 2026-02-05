@@ -45,9 +45,24 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s ease-in-out;
 }
-button:hover {
-  border-color: #646cff;
+button::after {
+  content: '';
+  position: absolute;
+  opacity: 0;
+  height: 90%;
+  width: 96%;
+  border-radius: 6px;
+  background: linear-gradient(to bottom right, #008cff, #e100ff);
+  transition: opacity 0.1s ease-in-out;
+  z-index: -1;
+}
+button:hover::after {
+  opacity: 1;
 }
 button:focus,
 button:focus-visible {
@@ -68,7 +83,7 @@ button:focus-visible {
 .backButton {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #1264bb;
   color: white;
   border: none;
   border-radius: 6px;
