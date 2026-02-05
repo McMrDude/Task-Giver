@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     fetch("/api/messages")
-    .then(res => res.json())
+    .then(res => res.json()) 
     .then(data => setMessages(data))
     .catch(err => console.error(err))
   }, [])

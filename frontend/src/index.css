@@ -78,19 +78,15 @@ button:focus-visible {
   left: 10px;
   padding: 4px; /* space used as the "border" area */
   border-radius: 9px;
-  display: inline-block;
   background: transparent; /* keep empty; gradient lives in ::before */
-  /* the pseudo-element below draws the gradient border */
+  display: inline-block;
+  position: relative;
 }
-
-.backWrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 9px;
-  background: linear-gradient(135deg, #008cff, #e100ff);
-  z-index: 0;
-  pointer-events: none;
+ 
+.backButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #000000;
   color: white;
   border: none;
   border-radius: 6px;
@@ -100,24 +96,18 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   transition: transform 0.1s ease-in-out;
-  position: relative; /* create containing block for ::after */
-  z-index: 1; /* keep button above the gradient border */
-  overflow: hidden; /* clip any inner overlays */
 }
 
 .backButton::after {
   content: '';
   position: absolute;
-  top: 4%;
-  left: 2%;
-  right: 2%;
-  bottom: 4%;
   opacity: 0;
+  height: 90%;
+  width: 96%;
   border-radius: 6px;
   background: linear-gradient(to bottom right, #008cff, #e100ff);
   transition: opacity 0.1s ease-in-out;
-  z-index: 0;
-  pointer-events: none;
+  z-index: -1;
 }
 .backButton:hover::after {
   opacity: 1;
