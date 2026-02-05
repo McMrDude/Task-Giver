@@ -81,8 +81,7 @@ button:focus-visible {
 }
 
 .backButton:hover {
-  height: 99%;
-  width: 99%;
+  size: 99%;
 }
 
 .backButton::after {
@@ -96,8 +95,7 @@ button:focus-visible {
 }
 .backButton:hover::after {
   opacity: 1;
-  height: 101%;
-  width: 101%;
+  size: 101%;
 }
 
 @media (prefers-color-scheme: light) {
