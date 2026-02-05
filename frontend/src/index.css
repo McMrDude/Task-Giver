@@ -53,7 +53,20 @@ button {
   justify-content: center;
   transition: transform 0.1s ease-in-out;
 }
-
+button::after {
+  content: '';
+  position: absolute;
+  opacity: 0;
+  height: 90%;
+  width: 96%;
+  border-radius: 6px;
+  background: linear-gradient(to bottom right, #008cff, #e100ff);
+  transition: opacity 0.1s ease-in-out;
+  z-index: -1;
+}
+button:hover::after {
+  opacity: 1;
+}
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -63,13 +76,23 @@ button:focus-visible {
   position: relative;
   padding: 2px;
   border-radius: 9px;
-  background-color: none;
   display: inline-block;
-  transition: background-color 0.3s ease-in-out;
 }
 
-.backWrap:hover {
-  background-color: linear-gradient(to bottom right, #008cff, #e100ff);
+.backWrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9px;
+  background: linear-gradient(to bottom right, #008cff, #e100ff);
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  z-index: 0;
+}
+
+.backWrap:hover::before,
+.backWrap:focus-within::before {
+  opacity: 1;
 }
  
 .backButton,
