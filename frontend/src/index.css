@@ -74,14 +74,15 @@ button:focus-visible {
 
 .backWrap {
   position: relative;
-  padding: 4px;
+  padding: 2px;
   border-radius: 9px;
   background: linear-gradient(to bottom right, #008cff, #e100ff);
   display: inline-block;
+  opacity: 0;
 }
 
 .backWrap:hover {
-  filter: brightness(1.15);
+  opacity: 1;
 }
  
 .backButton,
