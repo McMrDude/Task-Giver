@@ -84,8 +84,8 @@ button:focus-visible {
   content: '';
   position: absolute;
   opacity: 0;
-  height: 99%;
-  width: 99%;
+  height: 90%;
+  width: 96%;
   border-radius: 6px;
   background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #ff6ec4);
   transition: opacity 0.1s ease-in-out;
