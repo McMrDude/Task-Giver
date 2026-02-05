@@ -84,14 +84,14 @@ button:focus-visible {
   content: '';
   position: absolute;
   opacity: 0;
-  height: 102%;
-  width: 102%;
+  height: 101%;
+  width: 101%;
   border-radius: 6px;
   background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #ff6ec4);
   transition: opacity 0.3s ease-in-out;
   z-index: -1;
 }
-.backButton::after:hover {
+.backButton:hover::after {
   opacity: 1;
 }
 
