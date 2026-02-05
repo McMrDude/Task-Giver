@@ -77,9 +77,7 @@ export default function Register() {
         <br />
         <br />
 
-        <div className="backWrap">
           <button type="submit">Register</button>
-        </div>
       </form>
 
       <p id="msg">{msg}</p>
