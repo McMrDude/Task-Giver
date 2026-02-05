@@ -87,7 +87,7 @@ button:focus-visible {
   height: 90%;
   width: 96%;
   border-radius: 6px;
-  background: linear-gradient(45deg, #ff6ec4, #7873f5, #4ade80, #facc15, #ff6ec4);
+  background: linear-gradient(45deg, rgb(144, 0, 255), rgb(129, 0, 138));
   transition: opacity 0.1s ease-in-out;
   z-index: -1;
 }
