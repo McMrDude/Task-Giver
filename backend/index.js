@@ -5,6 +5,8 @@ import { fileURLToPath } from "url";
 import dotenv from "dotenv";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import session from "express-session";
+import pgSession from "connect-pg-simple";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -31,11 +33,32 @@ pool.query("SELECT NOW()")
     console.error("❌ Database connection failed:", err);
   });
 
+const PgSession = pgSession(session);
+
+const sessionStore = new PgSession({
+  pool: pool,
+  tableName: "session"
+});
+
 /* ------------------ MIDDLEWARE ------------------ */
 app.use(express.json()); 
 
 /* Serve React build folder in production */
 app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+app.use(
+  session({
+    store: sessionStore,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax"
+    }
+  })
+);
 
 /* ------------------ ROUTES ------------------ */
 
@@ -64,6 +87,14 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
+app.get("/api/me", (req, res) => {
+  if (!req.session.user) {
+    return res.json(null);
+  }
+  res.json(req.session.user);
+});
+
+
 // Create a new user (example)
 app.post("/register", async (req, res) => {
   try {
@@ -87,7 +118,13 @@ app.post("/register", async (req, res) => {
       [name, email, hash]
     );
 
-    res.json({ message: "Registered successfully", user: result.rows[0] });
+    req.session.user = {
+      id: result.rows[0].id,
+      name: result.rows[0].name,
+      email: result.rows[0].email,
+    };
+
+    res.json({ message: "Registered and logged in" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Registration failed" });

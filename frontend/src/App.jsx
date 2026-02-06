@@ -5,19 +5,17 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [messages, setMessages] = useState([])
-  const [users, setUsers] = useState([])
+  const [currentUser, setCurrentUser] = useState(null);
+
 
   useEffect(() => {
-    fetch("/api/messages")
-    .then(res => res.json()) 
-    .then(data => setMessages(data))
-    .catch(err => console.error(err))
-    fetch("/api/users")
+  fetch("/api/me", { credentials: "include" })
     .then(res => res.json())
-    .then(data => setUsers(data))
-    .catch(err => console.error(err))
-  }, [])
+    .then(user => setCurrentUser(user))
+    .catch(err => console.error(err));
+  }, []);
+
+
 
   return(
     <>
@@ -26,12 +24,11 @@ function App() {
       
       <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
       
-      {messages.map(msg => (
-        <p key={msg.id}>{msg.text}</p>
-      ))}
-      {users.map(user => (
-        <p key={user.id}>{user.name}</p>
-      ))}
+      {currentUser && (
+        <div style={{ position: "absolute", top: 10, right: 10 }}>
+          Logged in as {currentUser.name}
+        </div>
+      )}
     </>
   )
 }
