@@ -53,17 +53,7 @@ button {
   justify-content: center;
   transition: transform 0.1s ease-in-out;
 }
-button::after {
-  content: '';
-  position: absolute;
-  opacity: 0;
-  height: 90%;
-  width: 96%;
-  border-radius: 6px;
-  background: linear-gradient(to bottom right, #008cff, #e100ff);
-  transition: opacity 0.1s ease-in-out;
-  z-index: -1;
-}
+
 button:hover::after {
   opacity: 1;
 }
@@ -103,6 +93,11 @@ button:focus-visible {
   border: none;
   color: white;
   z-index: 1;
+}
+
+#return {
+  top: 10px;
+  left: 10px;
 }
 
 @media (prefers-color-scheme: light) {
