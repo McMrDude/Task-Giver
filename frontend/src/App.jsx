@@ -6,9 +6,11 @@ import './App.css'
 
 function App() {
   const [messages, setMessages] = useState([])
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     fetch("/api/messages")
+    fetch("/api/users")
     .then(res => res.json()) 
     .then(data => setMessages(data))
     .catch(err => console.error(err))
@@ -23,6 +25,9 @@ function App() {
       
       {messages.map(msg => (
         <p key={msg.id}>{msg.text}</p>
+      ))}
+      {users.map(user => (
+        <p key={user.id}>{user.name}</p>
       ))}
     </>
   )

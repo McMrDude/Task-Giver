@@ -52,6 +52,18 @@ app.get("/api/messages", async (req, res) => {
   }
 });
 
+app.get("/api/users", async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM users ORDER BY created_at DESC"
+    );
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Database error:", err);
+    res.status(500).json({ error: "Database query failed" });
+  }
+});
+
 // Create a new user (example)
 app.post("/register", async (req, res) => {
   try {
