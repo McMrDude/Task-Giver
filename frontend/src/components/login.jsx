@@ -46,7 +46,7 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <div className="backWrap">
+      <div className="backWrap" id='return'>
         <button
           onClick={() => navigate('/')}
         >
@@ -84,7 +84,7 @@ export default function Login() {
         <br />
 
         {/* Submit button - disabled while loading */}
-        <div className="backWrap" id='return'>
+        <div className="backWrap">
           <button type="submit" disabled={loading}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
