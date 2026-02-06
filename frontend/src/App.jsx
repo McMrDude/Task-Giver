@@ -19,10 +19,8 @@ function App() {
       <h1>Welcome dipshit</h1>
       <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
       
-      <div className="backWrap">
-        <Link to="/register"><button>Register</button></Link>
-      </div>
-
+      <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
+      
       {messages.map(msg => (
         <p key={msg.id}>{msg.text}</p>
       ))}
