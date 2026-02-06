@@ -84,9 +84,11 @@ export default function Login() {
         <br />
 
         {/* Submit button - disabled while loading */}
-        <button type="submit" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
+        <div className="backWrap">
+          <button type="submit" disabled={loading}>
+            {loading ? 'Logging in...' : 'Login'}
+          </button>
+        </div>
       </form>
 
       {/* Display error/success messages */}
