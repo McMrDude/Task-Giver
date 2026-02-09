@@ -14,7 +14,10 @@ const { Pool } = pkg;
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+  origin: true,
+  credentials: true
+}));
 
 /* ----------- FIX __dirname FOR ES MODULES ----------- */
 const __filename = fileURLToPath(import.meta.url);
@@ -41,6 +44,8 @@ const sessionStore = new PgSession({
 });
 
 /* ------------------ MIDDLEWARE ------------------ */
+app.set("trust proxy", 1);
+
 app.use(
   session({
     store: sessionStore,
@@ -49,11 +54,12 @@ app.use(
     saveUninitialized: false,
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: true,
       sameSite: "lax"
     }
   })
 );
+
 
 app.use(express.json()); 
 
