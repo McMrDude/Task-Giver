@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function UserSearch({ users }) {
-  const [query, setQuery] = useState(""); // what the user types
+function UserSearch({ users }) { // receive users as a prop
+  const [query, setQuery] = useState("");
 
-  // Filter users in real time
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -13,8 +12,8 @@ function UserSearch({ users }) {
       <input
         type="text"
         placeholder="Search users..."
-        value={query}           // controlled input
-        onChange={(e) => setQuery(e.target.value)} // update query
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         style={{ width: "200px", padding: "5px" }}
       />
       <ul>
