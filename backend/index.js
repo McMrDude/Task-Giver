@@ -41,11 +41,6 @@ const sessionStore = new PgSession({
 });
 
 /* ------------------ MIDDLEWARE ------------------ */
-app.use(express.json()); 
-
-/* Serve React build folder in production */
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
-
 app.use(
   session({
     store: sessionStore,
@@ -59,6 +54,11 @@ app.use(
     }
   })
 );
+
+app.use(express.json()); 
+
+/* Serve React build folder in production */
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
 /* ------------------ ROUTES ------------------ */
 
@@ -92,6 +92,7 @@ app.get("/api/me", (req, res) => {
     return res.json(null);
   }
   res.json(req.session.user);
+  console.log("SESSION SECRET:", process.env.SESSION_SECRET);
 });
 
 
