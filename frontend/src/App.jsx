@@ -30,20 +30,7 @@ function App() {
       
       <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
 
-      <div>
-        <input
-          type="text"
-          placeholder="Search users..."
-          value={query}           // controlled input
-          onChange={(e) => setQuery(e.target.value)} // update query
-          style={{ width: "200px", padding: "5px" }}
-        />
-        <ul>
-          {filteredUsers.map(user => (
-            <li key={user.id}>{user.name} ({user.email})</li>
-          ))}
-        </ul>
-      </div>
+      <UserSearch users={users} />
       
       {currentUser && (
         <div style={{ position: "absolute", top: 10, right: 10 }}>
