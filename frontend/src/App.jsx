@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import UserSearch from './searchBar.jsx'; 
+import UserSearch from './components/searchBar.jsx'; 
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
