@@ -87,16 +87,8 @@ button:focus-visible {
 }
  
 .backButton,
+.backWrap > button, 
 .backWrap > button {
-  position: relative;
-  background-color: #000;
-  border-radius: 6px;
-  border: none;
-  color: white;
-  z-index: 1;
-}
-
-#searchDiv {
   position: relative;
   background-color: #000;
   border-radius: 6px;
