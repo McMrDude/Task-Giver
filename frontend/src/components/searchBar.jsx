@@ -42,6 +42,7 @@ function UserSearch({ users }) {
 
       {open && (
         <div
+          ref={wrapperRef}
           style={{
             width: "25%",
             backgroundColor: "#313131",
