@@ -72,7 +72,7 @@ button:focus-visible {
 .backWrap::before {
   content: "";
   position: absolute;
-  inset: -3px;
+  inset: -1px;
   border-radius: 9px;
   background: linear-gradient(to bottom right, #008cff, #e100ff);
   opacity: 0;
@@ -91,7 +91,6 @@ button:focus-visible {
 .backWrap > div {
   position: relative;
   background-color: #000;
-  border-radius: 6px;
   border: none;
   color: white;
   z-index: 1;
