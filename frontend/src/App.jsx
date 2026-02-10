@@ -40,9 +40,7 @@ function App() {
       
       <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
 
-      <div className="backWrap">
-        <UserSearch users={users} />
-      </div>
+      <UserSearch users={users} />
       
       {currentUser && (
         <div style={{ position: "absolute", top: 10, right: 10 }}>
