@@ -99,14 +99,14 @@ button:focus-visible {
 .backWrapSearch {
   position: relative;
   padding: 2px;
-  border-radius: 9px;
+  border-radius: 3px;
   display: inline-block;
 }
 .backWrapSearch::before {
   content: "";
   position: absolute;
   inset: -1px;
-  border-radius: 9px;
+  border-radius: 3px;
   background: linear-gradient(to bottom right, #008cff, #e100ff);
   z-index: 0;
   pointer-events: none;
