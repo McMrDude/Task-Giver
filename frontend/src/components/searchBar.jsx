@@ -42,7 +42,6 @@ function UserSearch({ users }) {
 
       {open && (
         <div
-          id="searchDiv"
           className="backWrap"
           ref={wrapperRef}
           style={{
@@ -54,18 +53,20 @@ function UserSearch({ users }) {
             flexDirection: "column"
           }}
         >
-          {filteredUsers.length > 0 ? (
-            filteredUsers.map(user => (
-              <h4
-                key={user.id}
-                style={{ borderBottom: "1px solid #424242" }}
-              >
-                {user.name} ({user.email})
-              </h4>
-            ))
-          ) : (
-            <p style={{ color: "#aaa" }}>No users found</p>
-          )}
+          <div>
+            {filteredUsers.length > 0 ? (
+              filteredUsers.map(user => (
+                <h4
+                  key={user.id}
+                  style={{ borderBottom: "1px solid #424242" }}
+                >
+                  {user.name} ({user.email})
+                </h4>
+              ))
+            ) : (
+              <p style={{ color: "#aaa" }}>No users found</p>
+            )}
+          </div>
         </div>
       )}
     </div>
