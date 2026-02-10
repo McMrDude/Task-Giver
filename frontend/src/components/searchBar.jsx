@@ -8,7 +8,7 @@ function UserSearch({ users }) { // receive users as a prop
   );
 
   return (
-    <div>
+    <div style={{ width: "15%"}}>
       <input
         type="text"
         placeholder="Search users..."
@@ -16,9 +16,9 @@ function UserSearch({ users }) { // receive users as a prop
         onChange={(e) => setQuery(e.target.value)}
         style={{ width: "200px", padding: "5px" }}
       />
-      <div style={{ backgroundColor: "#5a5a5a", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
+      <div style={{ backgroundColor: "#313131", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
         {filteredUsers.map(user => (
-          <h4 key={user.id} style={{ borderBottom: "1px solid #6f6f6f" }}>{user.name} ({user.email})</h4>
+          <h4 key={user.id} style={{ borderBottom: "1px solid #4a4a4a" }}>{user.name} ({user.email})</h4>
         ))}
       </div>
     </div>
