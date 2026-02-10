@@ -16,7 +16,7 @@ function UserSearch({ users }) { // receive users as a prop
         onChange={(e) => setQuery(e.target.value)}
         style={{ width: "200px", padding: "5px" }}
       />
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
         {filteredUsers.map(user => (
           <h4 key={user.id} style={{ borderBottom: "1px solid #000000", padding: "5px 0" }}>{user.name} ({user.email})</h4>
         ))}
