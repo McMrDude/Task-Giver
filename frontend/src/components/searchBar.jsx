@@ -43,7 +43,7 @@ function UserSearch({ users }) {
       {open && (
         <div
           id="searchDiv"
-          className="backWrap"
+          className="backWrapSearch"
           ref={wrapperRef}
         >
           <div>
