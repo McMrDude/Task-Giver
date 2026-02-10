@@ -23,7 +23,6 @@ function UserSearch({ users }) {
 
   return (
     <div
-      ref={wrapperRef}
       style={{
         display: "flex",
         alignItems: "center",
@@ -32,6 +31,7 @@ function UserSearch({ users }) {
       }}
     >
       <input
+        ref={wrapperRef}
         type="text"
         placeholder="Search users..."
         value={query}
