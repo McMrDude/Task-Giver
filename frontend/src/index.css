@@ -78,6 +78,7 @@ button:focus-visible {
   opacity: 0;
   transition: opacity 0.15s ease-in-out;
   z-index: 0;
+  pointer-events: none;
 }
 
 .backWrap:hover::before,
@@ -102,6 +103,12 @@ button:focus-visible {
   border: none;
   color: white;
   z-index: 1;
+}
+
+#searchDiv h4,
+#searchDiv p {
+  position: relative;
+  z-index: 2;
 }
 
 #return {
