@@ -8,7 +8,7 @@ function UserSearch({ users }) { // receive users as a prop
   );
 
   return (
-    <div>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column" }}>
       <input
         type="text"
         placeholder="Search users..."
