@@ -45,14 +45,6 @@ function UserSearch({ users }) {
           id="searchDiv"
           className="backWrap"
           ref={wrapperRef}
-          style={{
-            width: "25%",
-            backgroundColor: "#313131",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column"
-          }}
         >
           <div>
             {filteredUsers.length > 0 ? (
