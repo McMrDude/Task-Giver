@@ -46,7 +46,7 @@ function UserSearch({ users }) {
           className="backWrapSearch"
           ref={wrapperRef}
         >
-          <div>
+          <div style={{ backgroundcolor: "#313131"}}>
             {filteredUsers.length > 0 ? (
               filteredUsers.map(user => (
                 <h4
