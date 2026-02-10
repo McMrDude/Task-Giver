@@ -96,6 +96,20 @@ button:focus-visible {
   z-index: 1;
 }
 
+#searchDiv {
+  position: relative;
+  background-color: #000;
+  border-radius: 6px;
+  border: none;
+  color: white;
+  z-index: 1;
+}
+
+#searchDiv h4,
+#searchDiv p {
+  position: relative;
+  z-index: 2;
+}
 
 #return {
   position: absolute;
