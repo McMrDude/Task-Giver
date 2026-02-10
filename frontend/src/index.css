@@ -72,12 +72,12 @@ button:focus-visible {
 .backWrap::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -3px;
   border-radius: 9px;
   background: linear-gradient(to bottom right, #008cff, #e100ff);
   opacity: 0;
   transition: opacity 0.15s ease-in-out;
-  z-index: 0;
+  z-index: -1;
 }
 
 .backWrap:hover::before,
