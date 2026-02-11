@@ -118,7 +118,6 @@ button:focus-visible {
 }
 
 #searchDiv {
-  background-color: #313131;
   display: flex;
   align-items: center;
   justify-content: center;
