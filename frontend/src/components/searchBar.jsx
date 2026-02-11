@@ -23,6 +23,7 @@ function UserSearch({ users }) {
 
   return (
     <div
+      ref={wrapperRef}
       style={{
         display: "flex",
         alignItems: "center",
@@ -43,7 +44,6 @@ function UserSearch({ users }) {
         <div
           id="searchDiv"
           className="backWrapSearch"
-          ref={wrapperRef}
         >
           <div style={{ }}>
             {filteredUsers.length > 0 ? (
