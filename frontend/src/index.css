@@ -90,10 +90,15 @@ button:focus-visible {
 .backWrap > button, 
 .backWrapSearch > div {
   position: relative;
-  background-color: #000;
+  
   border: none;
   color: white;
   z-index: 1;
+}
+
+.backButton,
+.backWrap > button{
+  background-color: #000;
 }
 
 .backWrapSearch {

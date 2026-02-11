@@ -51,7 +51,7 @@ function UserSearch({ users }) {
               filteredUsers.map(user => (
                 <h4
                   key={user.id}
-                  style={{ borderBottom: "1px solid #424242" }}
+                  style={{ border: "1px solid #5f5f5f", backgroundColor: "#444444" }}
                 >
                   {user.name} ({user.email})
                 </h4>
