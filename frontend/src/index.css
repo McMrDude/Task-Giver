@@ -101,6 +101,10 @@ button:focus-visible {
   background-color: #000;
 }
 
+.backWrapSearch > div {
+  background-color: #313131;
+}
+
 .backWrapSearch {
   position: relative;
   padding: 2px;

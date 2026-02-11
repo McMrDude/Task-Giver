@@ -46,12 +46,12 @@ function UserSearch({ users }) {
           className="backWrapSearch"
           ref={wrapperRef}
         >
-          <div style={{ backgroundcolor: "#313131"}}>
+          <div style={{ }}>
             {filteredUsers.length > 0 ? (
               filteredUsers.map(user => (
                 <h4
                   key={user.id}
-                  style={{ border: "1px solid #5f5f5f", backgroundColor: "#444444" }}
+                  style={{ border: "2px solid #5f5f5f", backgroundColor: "#444444" }}
                 >
                   {user.name} ({user.email})
                 </h4>
