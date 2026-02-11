@@ -23,7 +23,9 @@ function UserSearch({ users }) {
 
   return (
     <div
+      ref={wrapperRef}
       style={{
+        width: "292px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -31,7 +33,7 @@ function UserSearch({ users }) {
       }}
     >
       <input
-        ref={wrapperRef}
+        
         type="text"
         placeholder="Search users..."
         value={query}
@@ -42,7 +44,6 @@ function UserSearch({ users }) {
 
       {open && (
         <div
-          ref={wrapperRef}
           id="searchDiv"
           className="backWrapSearch"
         >
