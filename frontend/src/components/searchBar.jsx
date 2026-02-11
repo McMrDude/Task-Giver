@@ -17,8 +17,8 @@ function UserSearch({ users }) {
       }
     }
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
   return (
@@ -31,7 +31,6 @@ function UserSearch({ users }) {
       }}
     >
       <input
-        ref={wrapperRef}
         type="text"
         placeholder="Search users..."
         value={query}
