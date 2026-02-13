@@ -4,7 +4,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import UserSearch from './components/searchBar.jsx'; 
-import TaskSidebar from './components/TaskSidebar.jsx';
+import TaskSidebar from './components/TaskSideBar.jsx';
 
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
