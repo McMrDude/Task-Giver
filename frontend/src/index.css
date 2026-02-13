@@ -140,6 +140,25 @@ button:focus-visible {
   left: 10px;
 }
 
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -15%;
+  width: 15%;
+  height: 100vh;
+  background: #1f1f1f;
+  padding: 20px;
+  box-shadow: -4px 0 10px rgba(0,0,0,0.4);
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #5380aa;

@@ -4,8 +4,11 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import UserSearch from './components/searchBar.jsx'; 
+import TaskSidebar from './components/TaskSidebar.jsx';
 
 function App() {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -53,14 +56,24 @@ function App() {
       <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
       
       <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
-
-      <UserSearch users={users} />
       
       {currentUser && (
         <div style={{ position: "absolute", top: 10, right: 10 }}>
           Logged in as {currentUser.name}
         </div>
       )}
+
+      <div className="backWrap">
+        <button onClick={() => setSidebarOpen(true)}>
+          Create Task
+        </button>
+      </div>
+
+      <TaskSidebar
+        open={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        users={users}
+      />
 
       {tasks.length > 0 && (
         <div style={{ bottom: 20, width: "100%" }}>
