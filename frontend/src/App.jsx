@@ -34,11 +34,18 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
+  const fetchTasks = () => {
     fetch("/api/my-tasks", { credentials: "include" })
       .then(res => res.json())
-      .then(data => setTasks(data))
-      .catch(err => console.error(err));
-  }, []);
+      .then(data => setTasks(data));
+  };
+
+  fetchTasks(); // initial load
+
+  const interval = setInterval(fetchTasks, 5000); // every 5 sec
+
+  return () => clearInterval(interval);
+}, []);
 
   return(
     <>
@@ -56,7 +63,7 @@ function App() {
       )}
 
       {tasks.length > 0 && (
-        <div style={{ position: "absolute", bottom: 20, width: "100%" }}>
+        <div style={{ bottom: 20, width: "100%" }}>
           <h3>Your Tasks:</h3>
           {tasks.map(task => (
             <p key={task.id}>
