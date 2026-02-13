@@ -81,6 +81,53 @@ app.get("/api/messages", async (req, res) => {
   }
 });
 
+app.post("/api/tasks", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+    const { receiverId, content } = req.body;
+
+    if (!receiverId || !content) {
+      return res.status(400).json({ error: "Missing fields" });
+    }
+
+    await pool.query(
+      `INSERT INTO tasks (sender_id, receiver_id, content)
+       VALUES ($1, $2, $3)`,
+      [req.session.user.id, receiverId, content]
+    );
+
+    res.json({ task: "tasks sent" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to send tasks" });
+  }
+});
+
+app.get("/api/my-tasks", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+    const result = await pool.query(
+      `SELECT m.*, u.name as sender_name
+       FROM tasks m
+       JOIN users u ON m.sender_id = u.id
+       WHERE receiver_id = $1
+       ORDER BY created_at DESC`,
+      [req.session.user.id]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch tasks" });
+  }
+});
+
 app.get("/api/users", async (req, res) => {
   try {
     const result = await pool.query(

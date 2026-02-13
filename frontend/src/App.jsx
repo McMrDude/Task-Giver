@@ -31,7 +31,14 @@ function App() {
     .catch(err => console.error(err));
   }, []);
 
+  const [messages, setMessages] = useState([]);
 
+  useEffect(() => {
+    fetch("/api/my-messages", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setMessages(data))
+      .catch(err => console.error(err));
+  }, []);
 
   return(
     <>
@@ -45,6 +52,17 @@ function App() {
       {currentUser && (
         <div style={{ position: "absolute", top: 10, right: 10 }}>
           Logged in as {currentUser.name}
+        </div>
+      )}
+
+      {messages.length > 0 && (
+        <div style={{ position: "absolute", bottom: 20, width: "100%" }}>
+          <h3>Your Messages:</h3>
+          {messages.map(msg => (
+            <p key={msg.id}>
+              <strong>{msg.sender_name}:</strong> {msg.content}
+            </p>
+          ))}
         </div>
       )}
     </>
