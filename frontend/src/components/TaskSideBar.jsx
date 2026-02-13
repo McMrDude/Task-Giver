@@ -1,5 +1,5 @@
 import { useState } from "react";
-import UserSearch from "./searchBar";
+import UserSearch from "./searchBar.jsx";
 
 function TaskSidebar({ open, onClose, users }) {
   const [selectedUser, setSelectedUser] = useState(null);
