@@ -31,12 +31,12 @@ function App() {
     .catch(err => console.error(err));
   }, []);
 
-  const [messages, setMessages] = useState([]);
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    fetch("/api/my-messages", { credentials: "include" })
+    fetch("/api/my-tasks", { credentials: "include" })
       .then(res => res.json())
-      .then(data => setMessages(data))
+      .then(data => setTasks(data))
       .catch(err => console.error(err));
   }, []);
 
@@ -55,12 +55,12 @@ function App() {
         </div>
       )}
 
-      {messages.length > 0 && (
+      {tasks.length > 0 && (
         <div style={{ position: "absolute", bottom: 20, width: "100%" }}>
-          <h3>Your Messages:</h3>
-          {messages.map(msg => (
-            <p key={msg.id}>
-              <strong>{msg.sender_name}:</strong> {msg.content}
+          <h3>Your Tasks:</h3>
+          {tasks.map(task => (
+            <p key={task.id}>
+              <strong>{task.sender_name}:</strong> {task.content}
             </p>
           ))}
         </div>
