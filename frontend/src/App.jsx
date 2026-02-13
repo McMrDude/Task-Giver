@@ -69,6 +69,13 @@ function App() {
         </button>
       </div>
 
+      {sidebarOpen && (
+        <div
+          className="overlay"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       <TaskSidebar
         open={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
