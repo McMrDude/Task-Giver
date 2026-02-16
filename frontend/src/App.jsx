@@ -60,7 +60,7 @@ const [sentTasks, setSentTasks] = useState([]);
 
   return(
     <>
-      <h1>Welcome dipshit</h1>
+      <h1>Welcome {currentUser.name}</h1>
       <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
       
       <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>

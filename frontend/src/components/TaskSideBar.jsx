@@ -3,10 +3,11 @@ import UserSearch from "./searchBar.jsx";
 
 function TaskSidebar({ open, onClose, users }) {
   const [selectedUser, setSelectedUser] = useState(null);
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
   const handleSend = async () => {
-    if (!selectedUser || !content) return;
+    if (!selectedUser || !title || !content) return;
 
     await fetch("/api/tasks", {
       method: "POST",
@@ -14,11 +15,13 @@ function TaskSidebar({ open, onClose, users }) {
       credentials: "include",
       body: JSON.stringify({
         receiverId: selectedUser.id,
+        title,
         content
       })
     });
 
     setContent("");
+    setTitle("");
     setSelectedUser(null);
     alert("Task sent");
   };
@@ -40,6 +43,13 @@ function TaskSidebar({ open, onClose, users }) {
             Selected: <strong>{selectedUser.name}</strong>
             </p>
         )}
+
+        <textarea
+            placeholder="Title..."
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            style={{ marginTop: "10px", width: "100%", height: "10px" }}
+        />
 
         <textarea
             placeholder="Task description..."

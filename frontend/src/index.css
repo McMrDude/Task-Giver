@@ -17,6 +17,10 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+textarea {
+  resize: none;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
