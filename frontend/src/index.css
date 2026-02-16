@@ -169,8 +169,8 @@ button:focus-visible {
   backdrop-filter: blur(2px); /* optional modern blur */
   z-index: 900;
   opacity: 0;
-  animation: fadeIn 0.3s forwards;
-  animation: fadeOut 0.3s forwards;
+  animation: show 0.3s forwards;
+  animation: hide 0.3s forwards;
 }
 
 @keyframes show {
