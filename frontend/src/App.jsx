@@ -28,28 +28,20 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-  fetch("/api/me", { credentials: "include" })
-    .then(res => res.json())
-    .then(user => setCurrentUser(user))
-    .catch(err => console.error(err));
+    fetch("/api/me", { credentials: "include" })
+      .then(res => res.json())
+      .then(user => setCurrentUser(user))
+      .catch(err => console.error(err));
   }, []);
 
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-  const fetchTasks = () => {
-    fetch("/api/my-tasks", { credentials: "include" })
-      .then(res => res.json())
-      .then(data => setTasks(data));
+    const fetchTasks = () => {
+      fetch("/api/my-tasks", { credentials: "include" })
+        .then(res => res.json())
+        .then(data => setTasks(data));
   };
-
-  const [sentTasks, setSentTasks] = useState([]);
-
-  useEffect(() => {
-    fetch("/api/sent-tasks", { credentials: "include" })
-      .then(res => res.json())
-      .then(data => setSentTasks(data));
-  }, []);
 
   fetchTasks(); // initial load
 
@@ -57,6 +49,14 @@ function App() {
 
   return () => clearInterval(interval);
 }, []);
+
+const [sentTasks, setSentTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/sent-tasks", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setSentTasks(data));
+  }, []);
 
   return(
     <>
