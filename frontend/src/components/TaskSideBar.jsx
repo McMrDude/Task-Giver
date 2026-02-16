@@ -25,33 +25,37 @@ function TaskSidebar({ open, onClose, users }) {
 
   return (
     <div className={`sidebar ${open ? "open" : ""}`}>
-      <button onClick={onClose} style={{ alignSelf: "flex-end" }}>
-        ✕
-      </button>
+        <div className="backWrap">
+            <button onClick={onClose} style={{ alignSelf: "flex-end" }}>
+                ✕
+            </button>
+        </div>
 
-      <h3>Create Task</h3>
+        <h3>Create Task</h3>
 
-      <UserSearch users={users} onSelectUser={setSelectedUser} />
+        <UserSearch users={users} onSelectUser={setSelectedUser} />
 
-      {selectedUser && (
-        <p style={{ marginTop: "10px" }}>
-          Selected: <strong>{selectedUser.name}</strong>
-        </p>
-      )}
+        {selectedUser && (
+            <p style={{ marginTop: "10px" }}>
+            Selected: <strong>{selectedUser.name}</strong>
+            </p>
+        )}
 
-      <textarea
-        placeholder="Task description..."
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        style={{ marginTop: "10px", width: "100%", height: "80px" }}
-      />
+        <textarea
+            placeholder="Task description..."
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            style={{ marginTop: "10px", width: "100%", height: "80px" }}
+        />
 
-      <button
-        onClick={handleSend}
-        style={{ marginTop: "10px" }}
-      >
-        Send Task
-      </button>
+        <div className="backWrap">
+            <button
+                onClick={handleSend}
+                style={{ marginTop: "10px" }}
+            >
+                Send Task
+            </button>
+        </div>
     </div>
   );
 }
