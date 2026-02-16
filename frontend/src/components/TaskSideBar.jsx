@@ -25,8 +25,8 @@ function TaskSidebar({ open, onClose, users }) {
 
   return (
     <div className={`sidebar ${open ? "open" : ""}`}>
-        <div className="backWrap">
-            <button onClick={onClose} style={{ alignSelf: "flex-end" }}>
+        <div className="backWrap" style={{ alignSelf: "flex-end" }}>
+            <button onClick={onClose}>
                 ✕
             </button>
         </div>
@@ -48,10 +48,9 @@ function TaskSidebar({ open, onClose, users }) {
             style={{ marginTop: "10px", width: "100%", height: "80px" }}
         />
 
-        <div className="backWrap">
+        <div className="backWrap" style={{ marginTop: "10px" }}>
             <button
                 onClick={handleSend}
-                style={{ marginTop: "10px" }}
             >
                 Send Task
             </button>
