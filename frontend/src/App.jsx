@@ -71,7 +71,7 @@ function App() {
 
       {sidebarOpen && (
         <div
-          className="overlay"
+          className={`overlay ${sidebarOpen ? "show" : "hide"}`} 
           onClick={() => setSidebarOpen(false)}
         />
       )}
