@@ -43,6 +43,14 @@ function App() {
       .then(data => setTasks(data));
   };
 
+  const [sentTasks, setSentTasks] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/sent-tasks", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setSentTasks(data));
+  }, []);
+
   fetchTasks(); // initial load
 
   const interval = setInterval(fetchTasks, 5000); // every 5 sec
@@ -88,6 +96,17 @@ function App() {
           {tasks.map(task => (
             <p key={task.id}>
               <strong>{task.sender_name}:</strong> {task.content}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {sentTasks.length > 0 && (
+        <div>
+          <h3>Tasks You Sent:</h3>
+          {sentTasks.map(task => (
+            <p key={task.id}>
+              <strong>To {task.receiver_name}:</strong> {task.content}
             </p>
           ))}
         </div>

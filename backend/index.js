@@ -128,6 +128,28 @@ app.get("/api/my-tasks", async (req, res) => {
   }
 });
 
+app.get("/api/sent-tasks", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+    const result = await pool.query(
+      `SELECT t.*, u.name as receiver_name
+       FROM tasks t
+       JOIN users u ON t.receiver_id = u.id
+       WHERE sender_id = $1
+       ORDER BY created_at DESC`,
+      [req.session.user.id]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch sent tasks" });
+  }
+});
+
 app.get("/api/users", async (req, res) => {
   try {
     const result = await pool.query(
