@@ -48,7 +48,7 @@ function TaskSidebar({ open, onClose, users }) {
             style={{ marginTop: "10px", width: "100%", height: "80px" }}
         />
 
-        <div className="backWrap" style={{ marginTop: "10px" }}>
+        <div className="backWrap">
             <button
                 onClick={handleSend}
             >
