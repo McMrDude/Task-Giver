@@ -93,7 +93,7 @@ const [sentTasks, setSentTasks] = useState([]);
       {tasks.length > 0 && (
         <div style={{ bottom: 20, width: "100%" }}>
           <h3>Your Tasks:</h3>
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column" }}>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {tasks.map(task => (
               <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
@@ -114,7 +114,7 @@ const [sentTasks, setSentTasks] = useState([]);
       {sentTasks.length > 0 && (
         <div>
           <h3>Tasks You Sent:</h3>
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column" }}>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {sentTasks.map(task => (
               <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
