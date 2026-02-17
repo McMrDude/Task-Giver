@@ -95,7 +95,7 @@ app.post("/api/tasks", async (req, res) => {
 
     await pool.query(
       `INSERT INTO tasks (sender_id, receiver_id, title, content)
-       VALUES ($1, $2, $3)`,
+       VALUES ($1, $2, $3, $4)`,
       [req.session.user.id, receiverId, title, content]
     );
 

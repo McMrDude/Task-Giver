@@ -48,7 +48,7 @@ function TaskSidebar({ open, onClose, users }) {
             placeholder="Title..."
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{ marginTop: "10px", width: "100%", height: "10px" }}
+            style={{ marginTop: "10px", width: "100%", height: "25px" }}
         />
 
         <textarea
