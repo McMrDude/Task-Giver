@@ -94,9 +94,17 @@ const [sentTasks, setSentTasks] = useState([]);
         <div style={{ bottom: 20, width: "100%" }}>
           <h3>Your Tasks:</h3>
           {tasks.map(task => (
-            <p key={task.id}>
-              <strong>{task.sender_name}:</strong> {task.content}
-            </p>
+            <div style={{ borderRadius: 20, width: "100px", height: "auto"}}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                <p key={task.id}>
+                  <strong>From: {task.sender_name}</strong> 
+                </p>
+                <p key={task.id}>
+                  <strong>Task: {task.title}</strong> 
+                </p>
+              </div>
+              <p key={task.id}>{task.content}</p>
+            </div>
           ))}
         </div>
       )}
