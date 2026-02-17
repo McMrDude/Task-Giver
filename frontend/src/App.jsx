@@ -93,38 +93,42 @@ const [sentTasks, setSentTasks] = useState([]);
       {tasks.length > 0 && (
         <div style={{ bottom: 20, width: "100%" }}>
           <h3>Your Tasks:</h3>
-          {tasks.map(task => (
-            <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                <p key={task.id}>
-                  <strong>From: {task.sender_name}</strong> 
-                </p>
-                <p key={task.id}>
-                  <strong>Task: {task.title}</strong> 
-                </p>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column" }}>
+            {tasks.map(task => (
+              <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <p key={task.id}>
+                    <strong>From: {task.sender_name}</strong> 
+                  </p>
+                  <p key={task.id}>
+                    <strong>Task: {task.title}</strong> 
+                  </p>
+                </div>
+                <p key={task.id}>{task.content}</p>
               </div>
-              <p key={task.id}>{task.content}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
 
       {sentTasks.length > 0 && (
         <div>
           <h3>Tasks You Sent:</h3>
-          {sentTasks.map(task => (
-            <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                <p key={task.id}>
-                  <strong>To: {task.receiver_name}</strong> 
-                </p>
-                <p key={task.id}>
-                  <strong>Task: {task.title}</strong> 
-                </p>
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column" }}>
+            {sentTasks.map(task => (
+              <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                  <p key={task.id}>
+                    <strong>To: {task.receiver_name}</strong> 
+                  </p>
+                  <p key={task.id}>
+                    <strong>Task: {task.title}</strong> 
+                  </p>
+                </div>
+                <p key={task.id}>{task.content}</p>
               </div>
-              <p key={task.id}>{task.content}</p>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </>
