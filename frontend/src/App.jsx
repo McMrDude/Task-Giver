@@ -94,7 +94,7 @@ const [sentTasks, setSentTasks] = useState([]);
         <div style={{ bottom: 20, width: "100%" }}>
           <h3>Your Tasks:</h3>
           {tasks.map(task => (
-            <div style={{ borderRadius: 20, width: "100px", height: "auto"}}>
+            <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <p key={task.id}>
                   <strong>From: {task.sender_name}</strong> 
