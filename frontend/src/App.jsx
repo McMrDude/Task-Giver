@@ -96,11 +96,11 @@ const [sentTasks, setSentTasks] = useState([]);
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {tasks.map(task => (
               <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <p key={task.id}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <p key={task.id} style={{ margin: "1px"}}>
                     <strong>From: {task.sender_name}</strong> 
                   </p>
-                  <p key={task.id}>
+                  <p key={task.id} style={{ margin: "1px"}}>
                     <strong>Task: {task.title}</strong> 
                   </p>
                 </div>
@@ -117,11 +117,11 @@ const [sentTasks, setSentTasks] = useState([]);
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {sentTasks.map(task => (
               <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                  <p key={task.id}>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                  <p key={task.id} style={{ margin: "1px"}}>
                     <strong>To: {task.receiver_name}</strong> 
                   </p>
-                  <p key={task.id}>
+                  <p key={task.id} style={{ margin: "1px"}}>
                     <strong>Task: {task.title}</strong> 
                   </p>
                 </div>
