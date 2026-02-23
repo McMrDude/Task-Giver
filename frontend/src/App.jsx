@@ -142,8 +142,8 @@ const [sentTasks, setSentTasks] = useState([]);
           <div className='overlay' onClick={() => setSelectedTask(null)} />
           <div className='taskModal'>
             <h2>{selectedTask.title}</h2>
-            <p><strong>From:</strong> {selectedTask.sender.name} </p>
-            <p>{selectedTask.constent}</p>
+            <p><strong>From:</strong> {selectedTask.sender_name} </p>
+            <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
           </div>
         </>
