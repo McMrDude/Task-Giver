@@ -125,6 +125,26 @@ button:focus-visible {
   pointer-events: none;
 }
 
+#miniTaskDiv {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.taskModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 10px;
+  z-index: 1001;
+  width: 300px;
+}
+
 #searchDiv {
   display: flex;
   align-items: center;

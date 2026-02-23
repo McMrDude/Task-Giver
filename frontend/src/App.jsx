@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import UserSearch from './components/searchBar.jsx'; 
 import TaskSidebar from './components/TaskSideBar.jsx';
 
 function App() {
+  const [selectedTask, setSelectedTask] = useState(null);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [users, setUsers] = useState([]);
@@ -95,18 +96,18 @@ const [sentTasks, setSentTasks] = useState([]);
           <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
             Your Tasks:
           </h3>
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
+          <div className = "miniTaskDiv">
             {tasks.map(task => (
-              <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+              <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <p key={task.id} style={{ margin: "1px"}}>
+                  <p style={{ margin: "1px"}}>
                     <strong>From: {task.sender_name}</strong> 
                   </p>
-                  <p key={task.id} style={{ margin: "1px"}}>
+                  <p style={{ margin: "1px"}}>
                     <strong>Task: {task.title}</strong> 
                   </p>
                 </div>
-                <p key={task.id}>{task.content}</p>
+                <p>{task.content}</p>
               </div>
             ))}
           </div>
@@ -114,26 +115,38 @@ const [sentTasks, setSentTasks] = useState([]);
       )}
 
       {sentTasks.length > 0 && (
-        <div style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
           <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
             Tasks You Sent:
           </h3>
           <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {sentTasks.map(task => (
-              <div style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+              <div key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
-                  <p key={task.id} style={{ margin: "1px"}}>
+                  <p style={{ margin: "1px"}}>
                     <strong>To: {task.receiver_name}</strong> 
                   </p>
-                  <p key={task.id} style={{ margin: "1px"}}>
+                  <p style={{ margin: "1px"}}>
                     <strong>Task: {task.title}</strong> 
                   </p>
                 </div>
-                <p key={task.id}>{task.content}</p>
+                <p>{task.content}</p>
               </div>
             ))}
           </div>
         </div>
+      )}
+
+      {selectedTask && (
+        <>
+          <div className='overlay' onClick={() => setSelectedTask(null)} />
+          <div className='taskModal'>
+            <h2>{selectedTask.title}</h2>
+            <p><strong>From:</strong> {selectedTask.sender.name} </p>
+            <p>{selectedTask.constent}</p>
+            <button onClick={() => setSelectedTask(null)}>close</button>
+          </div>
+        </>
       )}
     </>
   )
