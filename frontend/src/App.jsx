@@ -139,7 +139,7 @@ const [sentTasks, setSentTasks] = useState([]);
 
       {selectedTask && (
         <>
-          <div className={`overlay ${sidebarOpen ? "show" : "hide"}`} onClick={() => setSelectedTask(null)} />
+          <div className='overlay show' onClick={() => setSelectedTask(null)} />
           <div className='taskModal'>
             <h2>{selectedTask.title}</h2>
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
