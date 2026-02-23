@@ -15,6 +15,19 @@ function App() {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    if (modalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    // Cleanup safety (important)
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [modalOpen]),
+
+  useEffect(() => {
     fetch("/api/users")
       .then(res => res.json())
       .then(data => setUsers(data))
@@ -140,18 +153,6 @@ const [sentTasks, setSentTasks] = useState([]);
       )}
 
       {selectedTask && (
-        useEffect(() => {
-          if (modalOpen) {
-            document.body.style.overflow = "hidden";
-          } else {
-            document.body.style.overflow = "auto";
-          }
-
-          // Cleanup safety (important)
-          return () => {
-            document.body.style.overflow = "auto";
-          };
-        }, [modalOpen]),
         <>
           <div className='overlay show' onClick={() => setSelectedTask(null)} />
           <div className='taskModal'>
