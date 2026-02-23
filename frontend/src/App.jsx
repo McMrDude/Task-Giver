@@ -10,6 +10,8 @@ function App() {
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const modalOpen = selectedTask || sidebarOpen;
+
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -138,6 +140,18 @@ const [sentTasks, setSentTasks] = useState([]);
       )}
 
       {selectedTask && (
+        useEffect(() => {
+          if (modalOpen) {
+            document.body.style.overflow = "hidden";
+          } else {
+            document.body.style.overflow = "auto";
+          }
+
+          // Cleanup safety (important)
+          return () => {
+            document.body.style.overflow = "auto";
+          };
+        }, [modalOpen]),
         <>
           <div className='overlay show' onClick={() => setSelectedTask(null)} />
           <div className='taskModal'>
