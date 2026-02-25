@@ -191,14 +191,15 @@ const [sentTasks, setSentTasks] = useState([]);
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
-          </div>
-          <p><strong>Status:</strong> {selectedTask.status}</p>
+            
+            <p><strong>Status:</strong> {selectedTask.status}</p>
 
-          {getNextStatus(selectedTask.status) && (
-            <button onClick={() => updateStatus(selectedTask)}>
-              Move to {getNextStatus(selectedTask.status)}
-            </button>
-          )}
+            {getNextStatus(selectedTask.status) && (
+              <button onClick={() => updateStatus(selectedTask)}>
+                Move to {getNextStatus(selectedTask.status)}
+              </button>
+            )}
+          </div>
         </>
       )}
     </>
