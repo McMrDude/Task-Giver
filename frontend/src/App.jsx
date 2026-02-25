@@ -50,9 +50,10 @@ function App() {
   const updateStatus = async (task) => {
     const nextStatus = getNextStatus(task.status);
 
-    if (!nextStatus) return; // aldready completed
+    if (!nextStatus) return; // already completed
 
-    await fetch(`/api/tasks/${task.id}/status`, {
+    // send the update request to the server
+    const resp = await fetch(`/api/tasks/${task.id}/status`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -61,10 +62,20 @@ function App() {
       body: JSON.stringify({ status: nextStatus }),
     });
 
-    // refresh tasks after update
+    // optimistically update the selected task state so the modal updates immediately
+    setSelectedTask(prev => prev && { ...prev, status: nextStatus });
+
+    // refresh the task lists as well
     fetch("/api/my-tasks", { credentials: "include" })
       .then(res => res.json())
-      .then(data => setTasks(data));
+      .then(data => {
+        setTasks(data);
+        // if the modal is open, try to keep the selectedTask in sync with the latest data
+        if (selectedTask) {
+          const updated = data.find(t => t.id === selectedTask.id);
+          if (updated) setSelectedTask(updated);
+        }
+      });
   };
 
   // Filter users in real time
@@ -191,7 +202,7 @@ const [sentTasks, setSentTasks] = useState([]);
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
-            
+
             <p><strong>Status:</strong> {selectedTask.status}</p>
 
             {getNextStatus(selectedTask.status) && (
