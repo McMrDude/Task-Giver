@@ -217,7 +217,7 @@ const [sentTasks, setSentTasks] = useState([]);
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "center" }}>
+            <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
               <svg height="20" width="20">
                 <circle cx="10" cy="10" r="7" fill={getStatusColor(selectedTask.status)} />
               </svg>
