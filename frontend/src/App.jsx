@@ -164,11 +164,11 @@ const [sentTasks, setSentTasks] = useState([]);
       />
 
       {tasks.length > 0 && (
-        <div style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+        <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
           <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
             Your Tasks:
           </h3>
-          <div className = "miniTaskDiv">
+          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
             {tasks.map(task => (
               <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
