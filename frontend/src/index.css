@@ -140,10 +140,11 @@ button:focus-visible {
   left: 50%;
   transform: translate(-50%, -50%);
   background: #1f1f1f;
-  padding: 100px;
+  padding: 30px;
   border-radius: 10px;
   z-index: 1001;
-  width: 500px;
+  height: 350px;
+  width: 550px;
 }
 
 #searchDiv {

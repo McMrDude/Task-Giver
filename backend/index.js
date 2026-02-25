@@ -234,6 +234,29 @@ app.post("/login", async (req, res) => {
   }
 });
 
+app.put("/api/tasks/:id/status", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+     const { id } = req.params;
+     const { status } = req.body;
+
+     await pool.query(
+      `UPDATE tasks
+      SET status = $1
+      WHERE id = $2 AND receiver_id = $3`,
+      [status, id, req.session.user.id]
+     );
+
+     res.json({ message: "Status updated" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to update status" });
+  }
+});
+
 /* Catch-all to serve React in production */
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));

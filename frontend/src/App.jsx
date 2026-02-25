@@ -36,6 +36,37 @@ function App() {
 
   const [query, setQuery] = useState(""); // what the user types
 
+  const getNextStatus = (currentStatus) => {
+    const order = ["new", "not_started", "started", "completed"];
+    const currentIndex = order.indexOf(currentStatus);
+
+    if (currentIndex === -1 || currentIndex === order.length - 1) {
+      return null; // already completed
+    }
+
+    return order[currentIndex + 1];
+  }
+
+  const updateStatus = async (task) => {
+    const nextStatus = getNextStatus(task.status);
+
+    if (!nextStatus) return; // aldready completed
+
+    await fetch(`/api/tasks/${task.id}/status`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify({ status: nextStatus }),
+    });
+
+    // refresh tasks after update
+    fetch("/api/my-tasks", { credentials: "include" })
+      .then(res => res.json())
+      .then(data => setTasks(data));
+  };
+
   // Filter users in real time
   const filteredUsers = users.filter(user =>
     user.name.toLowerCase().includes(query.toLowerCase())
@@ -161,6 +192,13 @@ const [sentTasks, setSentTasks] = useState([]);
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
           </div>
+          <p><strong>Status:</strong> {selectedTask.status}</p>
+
+          {getNextStatus(selectedTask.status) && (
+            <button onClick={() => updateStatus(selectedTask)}>
+              Move to {getNextStatus(selectedTask.status)}
+            </button>
+          )}
         </>
       )}
     </>
