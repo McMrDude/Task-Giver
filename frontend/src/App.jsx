@@ -100,11 +100,11 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(async () => {
+  /* useEffect(async () => {
     if (selectedTask && selectedTask.status === "new" && currentUser && selectedTask.receiver_id === currentUser.id) {
       updateStatus(selectedTask);
     }
-  })
+  }) */
 
   useEffect(() => {
     fetch("/api/me", { credentials: "include" })
