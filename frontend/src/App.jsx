@@ -78,6 +78,35 @@ function App() {
       });
   };
 
+  
+  useEffect(async () => {
+    if (selectedTask && selectedTask.status === "new" && currentUser && selectedTask.receiver_id === currentUser.id) {
+      const resp = await fetch(`/api/tasks/${task.id}/status`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ status: nextStatus }),
+      });
+
+      // optimistically update the selected task state so the modal updates immediately
+      setSelectedTask(prev => prev && { ...prev, status: nextStatus });
+
+      // refresh the task lists as well
+      fetch("/api/my-tasks", { credentials: "include" })
+        .then(res => res.json())
+        .then(data => {
+          setTasks(data);
+          // if the modal is open, try to keep the selectedTask in sync with the latest data
+          if (selectedTask) {
+            const updated = data.find(t => t.id === selectedTask.id);
+            if (updated) setSelectedTask(updated);
+          }
+        });
+    }
+  }, [selectedTask, currentUser]);
+
   const getStatusColor = (status) => {
     switch (status) {
       case "new":
