@@ -78,7 +78,28 @@ function App() {
       });
   };
 
-  
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "new":
+        return "turquoise";
+      case "not_started":
+        return "red";
+      case "started":
+        return "yellow";
+      case "completed":
+        return "green";
+      default:
+        return "white";
+    }
+  };
+
+  // Filter users in real time
+  const filteredUsers = users.filter(user =>
+    user.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  const [currentUser, setCurrentUser] = useState(null);
+
   useEffect(async () => {
     if (selectedTask && selectedTask.status === "new" && currentUser && selectedTask.receiver_id === currentUser.id) {
       const resp = await fetch(`/api/tasks/${task.id}/status`, {
@@ -106,28 +127,6 @@ function App() {
         });
     }
   }, [selectedTask, currentUser]);
-
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "new":
-        return "turquoise";
-      case "not_started":
-        return "red";
-      case "started":
-        return "yellow";
-      case "completed":
-        return "green";
-      default:
-        return "white";
-    }
-  };
-
-  // Filter users in real time
-  const filteredUsers = users.filter(user =>
-    user.name.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
     fetch("/api/me", { credentials: "include" })
