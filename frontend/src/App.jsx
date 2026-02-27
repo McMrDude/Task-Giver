@@ -209,6 +209,12 @@ const [sentTasks, setSentTasks] = useState([]);
                   </p>
                 </div>
                 <p>{task.content}</p>
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <svg height="20" width="20">
+                    <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
+                  </svg>
+                  <p><strong>Status:</strong> {task.status}</p>
+                </div>
               </div>
             ))}
           </div>
