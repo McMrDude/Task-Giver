@@ -144,10 +144,10 @@ const [sentTasks, setSentTasks] = useState([]);
 
   return(
     <>
-      <div style={{ display: "flex", flexBasis: 10}}>
+      {/* <div style={{ display: "flex", flexBasis: 10}}>
 
       </div>
-      <div style={{ display: "flex", flexBasis: 10, flexDirection: "column" }}>
+      <div style={{ display: "flex", flexBasis: 90, flexDirection: "column" }}> */}
         <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
         <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
         
@@ -261,7 +261,7 @@ const [sentTasks, setSentTasks] = useState([]);
             </div>
           </>
         )}
-      </div>
+      {/* </div> */}
     </>
   )
 }
