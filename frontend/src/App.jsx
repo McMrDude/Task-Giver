@@ -239,7 +239,7 @@ const [sentTasks, setSentTasks] = useState([]);
           <div className='taskModal'>
             <h2>{selectedTask.title}</h2>
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
-            <strong>Due: {formatDate(task.due_date)}</strong>
+            <strong>Due: {formatDate(selectedTask.due_date)}</strong>
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
