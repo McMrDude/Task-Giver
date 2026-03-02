@@ -5,6 +5,7 @@ function TaskSidebar({ open, onClose, users }) {
   const [selectedUser, setSelectedUser] = useState(null);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [due_date, setDueDate] = useState("");
 
   const handleSend = async () => {
     if (!selectedUser || !title || !content) return;
@@ -16,7 +17,8 @@ function TaskSidebar({ open, onClose, users }) {
       body: JSON.stringify({
         receiverId: selectedUser.id,
         title,
-        content
+        content,
+        due_date
       })
     });
 
@@ -49,6 +51,15 @@ function TaskSidebar({ open, onClose, users }) {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             style={{ marginTop: "10px", width: "100%", height: "25px" }}
+        />
+
+        <label>Due Date:</label>
+
+        <input
+            type="date"
+            value={due_date}
+            onChange={(e) => setDueDate(e.target.value)}
+            required
         />
 
         <textarea

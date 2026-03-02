@@ -137,6 +137,11 @@ const [sentTasks, setSentTasks] = useState([]);
       .then(data => setSentTasks(data));
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US");
+  };
+
   return(
     <>
       <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
@@ -186,6 +191,7 @@ const [sentTasks, setSentTasks] = useState([]);
                   </p>
                 </div>
                 <p>{task.content}</p>
+                <strong>Due: {formatDate(task.due_date)}</strong>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                   <svg height="20" width="20">
                     <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
@@ -233,6 +239,7 @@ const [sentTasks, setSentTasks] = useState([]);
           <div className='taskModal'>
             <h2>{selectedTask.title}</h2>
             <p><strong>From:</strong> {selectedTask.sender_name} </p>
+            <strong>Due: {formatDate(task.due_date)}</strong>
             <p>{selectedTask.content}</p>
             <button onClick={() => setSelectedTask(null)}>close</button>
             <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
