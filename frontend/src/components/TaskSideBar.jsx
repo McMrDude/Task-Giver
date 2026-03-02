@@ -8,7 +8,7 @@ function TaskSidebar({ open, onClose, users }) {
   const [due_date, setDueDate] = useState("");
 
   const handleSend = async () => {
-    if (!selectedUser || !title || !content) return;
+    if (!selectedUser || !title || !content || !due_date) return;
 
     await fetch("/api/tasks", {
       method: "POST",
