@@ -145,7 +145,7 @@ const [sentTasks, setSentTasks] = useState([]);
   return(
     <>
       <div style={{ display: "flex" }}>
-        <div style={{flexBasis: "10%" }}>
+        <div style={{flexBasis: "10%", border: "2px solid #008cff" }}>
 
         </div>
         <div style={{ flexBasis: "90%" }}>
