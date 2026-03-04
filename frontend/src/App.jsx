@@ -145,7 +145,7 @@ const [sentTasks, setSentTasks] = useState([]);
   return(
     <>
       <div style={{ display: "flex" }}>
-        <div style={{position: "fixed", top: "0", right: "100%", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+        <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
           <button>shitassTestButton</button>
         </div>
         <div style={{ flexBasis: "90%" }}>
