@@ -146,7 +146,9 @@ const [sentTasks, setSentTasks] = useState([]);
     <>
       <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
         <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
-          <button>shitassTestButton</button>
+          <div className='backWrap'>
+            <button>shitassTestButton</button>
+          </div>
         </div>
         <div style={{ flexBasis: "90%" }}>
           <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
