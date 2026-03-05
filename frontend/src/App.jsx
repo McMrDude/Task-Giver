@@ -144,141 +144,157 @@ const [sentTasks, setSentTasks] = useState([]);
     return date.toLocaleDateString("en-US");
   };
 
-  return(
-    <>
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+  if (view === "home") {
+    return(
+      <>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+          <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+            <div className='backWrap'>
+              <button onClick={() => setView("home")}>Home</button>
+            </div>
+            <div className='backWrap'>
+                <button onClick={() => setView("tasks")}>Tasks</button>
+            </div>
+          </div>
+            <div style={{ flexBasis: "90%" }}>
+              <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
+              <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
+
+              {currentUser && (
+                <div style={{ position: "absolute", top: 10, right: 10 }}>
+                  Logged in as {currentUser.name}
+                </div>
+              )}
+              
+              <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
+
+              <div className="backWrap">
+                <button onClick={() => setSidebarOpen(true)}>
+                  Create Task
+                </button>
+              </div>
+
+              {sidebarOpen && (
+                <div
+                  className={`overlay ${sidebarOpen ? "show" : "hide"}`} 
+                  onClick={() => setSidebarOpen(false)}
+                />
+              )}
+
+              <TaskSidebar
+                open={sidebarOpen}
+                onClose={() => setSidebarOpen(false)}
+                users={users}
+              />
+
+              {tasks.length > 0 && (
+                <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
+                    Your Tasks:
+                  </h3>
+                  <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
+                    {tasks.map(task => (
+                      <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <p style={{ margin: "1px"}}>
+                            <strong>From: {task.sender_name}</strong> 
+                          </p>
+                          <p style={{ margin: "1px"}}>
+                            <strong>Task: {task.title}</strong> 
+                          </p>
+                        </div>
+                        <p>{task.content}</p>
+                        <strong>Due: {formatDate(task.due_date)}</strong>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                          <svg height="20" width="20">
+                            <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
+                          </svg>
+                          <p><strong>Status:</strong> {task.status}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {sentTasks.length > 0 && (
+                <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
+                    Tasks You Sent:
+                  </h3>
+                  <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
+                    {sentTasks.map(task => (
+                      <div key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                          <p style={{ margin: "1px"}}>
+                            <strong>To: {task.receiver_name}</strong> 
+                          </p>
+                          <p style={{ margin: "1px"}}>
+                            <strong>Task: {task.title}</strong> 
+                          </p>
+                        </div>
+                        <p>{task.content}</p>
+                        <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                          <svg height="20" width="20">
+                            <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
+                          </svg>
+                          <p><strong>Status:</strong> {task.status}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {selectedTask && (
+                <>
+                  <div className='overlay show' onClick={() => setSelectedTask(null)} />
+                  <div className='taskModal'>
+                    <h2>{selectedTask.title}</h2>
+                    <p><strong>From:</strong> {selectedTask.sender_name} </p>
+                    <strong>Due: {formatDate(selectedTask.due_date)}</strong>
+                    <p>{selectedTask.content}</p>
+                    <div className="backWrap">
+                      <button onClick={() => setSelectedTask(null)}>close</button>
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                      <svg height="20" width="20">
+                        <circle cx="10" cy="10" r="7" fill={getStatusColor(selectedTask.status)} />
+                      </svg>
+                      <p><strong>Status:</strong> {selectedTask.status}</p>
+                    </div>
+
+                    {getNextStatus(selectedTask.status) && (
+                      <div className="backWrap">
+                        <button onClick={() => updateStatus(selectedTask)}>
+                          Move to {getNextStatus(selectedTask.status)}
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+        </div>
+      </>
+    )
+  }
+
+  if (view === "tasks") {
+    return (
+      <>
         <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
           <div className='backWrap'>
-            <button>Button1</button>
-            <button>Button2</button>
-            <button>Button3</button>
-            <button>Button4</button>
+              <button onClick={() => setView("home")}>Home</button>
+          </div>
+          <div className='backWrap'>
+              <button onClick={() => setView("tasks")}>Tasks</button>
           </div>
         </div>
-        if (view === "home") {
-          <div style={{ flexBasis: "90%" }}>
-            <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
-            <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
-
-            {currentUser && (
-              <div style={{ position: "absolute", top: 10, right: 10 }}>
-                Logged in as {currentUser.name}
-              </div>
-            )}
-            
-            <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
-
-            <div className="backWrap">
-              <button onClick={() => setSidebarOpen(true)}>
-                Create Task
-              </button>
-            </div>
-
-            {sidebarOpen && (
-              <div
-                className={`overlay ${sidebarOpen ? "show" : "hide"}`} 
-                onClick={() => setSidebarOpen(false)}
-              />
-            )}
-
-            <TaskSidebar
-              open={sidebarOpen}
-              onClose={() => setSidebarOpen(false)}
-              users={users}
-            />
-
-            {tasks.length > 0 && (
-              <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
-                  Your Tasks:
-                </h3>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
-                  {tasks.map(task => (
-                    <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-                      <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <p style={{ margin: "1px"}}>
-                          <strong>From: {task.sender_name}</strong> 
-                        </p>
-                        <p style={{ margin: "1px"}}>
-                          <strong>Task: {task.title}</strong> 
-                        </p>
-                      </div>
-                      <p>{task.content}</p>
-                      <strong>Due: {formatDate(task.due_date)}</strong>
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                        <svg height="20" width="20">
-                          <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
-                        </svg>
-                        <p><strong>Status:</strong> {task.status}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {sentTasks.length > 0 && (
-              <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
-                  Tasks You Sent:
-                </h3>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "row", justifyContent: "center" }}>
-                  {sentTasks.map(task => (
-                    <div key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
-                      <div style={{ display: 'flex', flexDirection: 'column' }}>
-                        <p style={{ margin: "1px"}}>
-                          <strong>To: {task.receiver_name}</strong> 
-                        </p>
-                        <p style={{ margin: "1px"}}>
-                          <strong>Task: {task.title}</strong> 
-                        </p>
-                      </div>
-                      <p>{task.content}</p>
-                      <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                        <svg height="20" width="20">
-                          <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
-                        </svg>
-                        <p><strong>Status:</strong> {task.status}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {selectedTask && (
-              <>
-                <div className='overlay show' onClick={() => setSelectedTask(null)} />
-                <div className='taskModal'>
-                  <h2>{selectedTask.title}</h2>
-                  <p><strong>From:</strong> {selectedTask.sender_name} </p>
-                  <strong>Due: {formatDate(selectedTask.due_date)}</strong>
-                  <p>{selectedTask.content}</p>
-                  <div className="backWrap">
-                    <button onClick={() => setSelectedTask(null)}>close</button>
-                  </div>
-                  <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                    <svg height="20" width="20">
-                      <circle cx="10" cy="10" r="7" fill={getStatusColor(selectedTask.status)} />
-                    </svg>
-                    <p><strong>Status:</strong> {selectedTask.status}</p>
-                  </div>
-
-                  {getNextStatus(selectedTask.status) && (
-                    <div className="backWrap">
-                      <button onClick={() => updateStatus(selectedTask)}>
-                        Move to {getNextStatus(selectedTask.status)}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </>
-            )}
-          </div>
-        }
-      </div>
-    </>
-  )
+        <h1>sup dude</h1>
+      </>
+    )
+  }
 }
 
 export default App
