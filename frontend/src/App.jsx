@@ -117,6 +117,20 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
+  if (tasks.isArray()) {
+    useEffect(() => {
+      const fetchTasks = () => {
+        fetch("/api/my-tasks", { credentials: "include" })
+          .then(res => res.json())
+          .then(data => setTasks(data));
+      };
+
+      fetchTasks(); // initial load
+    }, []);
+  } else {
+    setTasks([]);
+  }
+
   const firstTasks = tasks.slice(0, 5); // get first 5 tasks for the home view
 
   useEffect(() => {
@@ -131,7 +145,7 @@ function App() {
   const interval = setInterval(fetchTasks, 5000); // every 5 sec
 
   return () => clearInterval(interval);
-}, []);
+  }, []);
 
 const [sentTasks, setSentTasks] = useState([]);
 
