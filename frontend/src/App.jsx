@@ -117,7 +117,7 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  const firstTasks = tasks.slice(0, 5); // get first 5 tasks for the home view
+  /* const firstTasks = tasks.slice(0, 5); */ // get first 5 tasks for the home view
 
   useEffect(() => {
     const fetchTasks = () => {
