@@ -117,27 +117,19 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  if (Array.isArray(tasks)) {
-    useEffect(() => {
-      const fetchTasks = () => {
-        fetch("/api/my-tasks", { credentials: "include" })
-          .then(res => res.json())
-          .then(data => setTasks(data));
-      };
-
-      fetchTasks(); // initial load
-    }, []);
-  } else {
-    setTasks([]);
-  }
-
   const firstTasks = tasks.slice(0, 5); // get first 5 tasks for the home view
 
   useEffect(() => {
     const fetchTasks = () => {
       fetch("/api/my-tasks", { credentials: "include" })
         .then(res => res.json())
-        .then(data => setTasks(data));
+        .then(data => {
+          if (Array.isArray(data)) {
+            setTasks(data);
+          } else {
+            setTasks([]);
+          }
+        });
   };
 
   fetchTasks(); // initial load
