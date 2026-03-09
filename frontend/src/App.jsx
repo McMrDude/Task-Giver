@@ -117,7 +117,7 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
-  /* if (tasks.isArray()) {
+  if (Array.isArray(tasks)) {
     useEffect(() => {
       const fetchTasks = () => {
         fetch("/api/my-tasks", { credentials: "include" })
@@ -129,7 +129,7 @@ function App() {
     }, []);
   } else {
     setTasks([]);
-  } */
+  }
 
   const firstTasks = tasks.slice(0, 5); // get first 5 tasks for the home view
 
