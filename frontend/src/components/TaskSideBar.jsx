@@ -6,7 +6,7 @@ function TaskSidebar({ open, onClose, users }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [due_date, setDueDate] = useState("");
-  const [priority, setPriority] = useState("");
+  const [priority, setPriority] = useState("low");
 
   const handleSend = async () => {
     if (!selectedUser || !title || !content || !due_date || !priority) return;
