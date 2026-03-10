@@ -6,9 +6,10 @@ function TaskSidebar({ open, onClose, users }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [due_date, setDueDate] = useState("");
+  const [priority, setPriority] = useState("");
 
   const handleSend = async () => {
-    if (!selectedUser || !title || !content || !due_date) return;
+    if (!selectedUser || !title || !content || !due_date || !priority) return;
 
     await fetch("/api/tasks", {
       method: "POST",
@@ -18,7 +19,8 @@ function TaskSidebar({ open, onClose, users }) {
         receiverId: selectedUser.id,
         title,
         content,
-        due_date
+        due_date,
+        priority
       })
     });
 
@@ -62,7 +64,10 @@ function TaskSidebar({ open, onClose, users }) {
             required
         />
 
-        <select name="priority">
+        <select 
+        name="priority"
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}>
             <option value={"low"}>Low</option>
             <option value={"medium"}>Medium</option>
             <option value={"high"}>High</option>

@@ -87,16 +87,16 @@ app.post("/api/tasks", async (req, res) => {
       return res.status(401).json({ error: "Not logged in" });
     }
 
-    const { receiverId, title, content, due_date } = req.body;
+    const { receiverId, title, content, due_date, priority } = req.body;
 
-    if (!receiverId || !title || !content || !due_date) {
+    if (!receiverId || !title || !content || !due_date || !priority) {
       return res.status(400).json({ error: "Missing fields" });
     }
 
     await pool.query(
-      `INSERT INTO tasks (sender_id, receiver_id, title, content, due_date)
-       VALUES ($1, $2, $3, $4, $5)`,
-      [req.session.user.id, receiverId, title, content, due_date]
+      `INSERT INTO tasks (sender_id, receiver_id, title, content, due_date, priority)
+       VALUES ($1, $2, $3, $4, $5, $6)`,
+      [req.session.user.id, receiverId, title, content, due_date, priority]
     );
 
     res.json({ task: "tasks sent" });
