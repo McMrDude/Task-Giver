@@ -119,6 +119,14 @@ function App() {
 
   const [tasks, setTasks] = useState([]);
 
+  const toggleSort = () => {
+    if (sortMode === "newest") {
+      setSortMode("priority");
+    } else {
+      setSortMode("newest");
+    }
+  };
+
   const sortedTasks = [...tasks];
 
   const priorityRank = {
@@ -321,6 +329,7 @@ const [sentTasks, setSentTasks] = useState([]);
               <button onClick={() => setView("tasks")}>Tasks</button>
           </div>
         </div>
+        <button onClick={toggleSort}>{sortMode === "newest" ? "Sort by Newest" : "Sort by Priority"}</button>
         {sortedTasks.length > 0 && (
           <div className = "miniTaskDiv" style={{ bottom: 20, width: "100%", bottom: "20px", width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
             <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
