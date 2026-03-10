@@ -62,6 +62,12 @@ function TaskSidebar({ open, onClose, users }) {
             required
         />
 
+        <select name="priority">
+            <option value={"low"}>Low</option>
+            <option value={"medium"}>Medium</option>
+            <option value={"high"}>High</option>
+        </select>
+
         <textarea
             placeholder="Task description..."
             value={content}
