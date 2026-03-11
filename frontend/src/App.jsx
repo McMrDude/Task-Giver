@@ -321,44 +321,46 @@ const [sentTasks, setSentTasks] = useState([]);
   if (view === "tasks") {
     return (
       <>
-        <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
-          <div className='backWrap'>
-              <button onClick={() => setView("home")}>Home</button>
-          </div>
-          <div className='backWrap'>
-              <button onClick={() => setView("tasks")}>Tasks</button>
-          </div>
-        </div>
-        <button onClick={toggleSort}>{sortMode === "newest" ? "Sort by Newest" : "Sort by Priority"}</button>
-        {sortedTasks.length > 0 && (
-          <div className = "miniTaskDiv" style={{flexBasis: "90%", bottom: 20, width: "100%", bottom: "20px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
-              Your Tasks:
-            </h3>
-            <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center" }}>
-              {sortedTasks.map(task => (
-                <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010"}}>
-                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                    <p style={{ margin: "1px"}}>
-                      <strong>From: {task.sender_name}</strong> 
-                    </p>
-                    <p style={{ margin: "1px"}}>
-                      <strong>Task: {task.title}</strong> 
-                    </p>
-                  </div>
-                  <p>{task.content}</p>
-                  <strong>Due: {formatDate(task.due_date)}</strong>
-                  <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
-                    <svg height="20" width="20">
-                      <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
-                    </svg>
-                    <p><strong>Status:</strong> {task.status}</p>
-                  </div>
-                </div>
-              ))}
+        <div style={{ display: "flex" }}>
+          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+            <div className='backWrap'>
+                <button onClick={() => setView("home")}>Home</button>
+            </div>
+            <div className='backWrap'>
+                <button onClick={() => setView("tasks")}>Tasks</button>
             </div>
           </div>
-        )}
+          <button onClick={toggleSort}>{sortMode === "newest" ? "Sort by Newest" : "Sort by Priority"}</button>
+          {sortedTasks.length > 0 && (
+            <div className = "miniTaskDiv" style={{flexBasis: "90%", bottom: 20, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+              <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
+                Your Tasks:
+              </h3>
+              <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center" }}>
+                {sortedTasks.map(task => (
+                  <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010"}}>
+                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                      <p style={{ margin: "1px"}}>
+                        <strong>From: {task.sender_name}</strong> 
+                      </p>
+                      <p style={{ margin: "1px"}}>
+                        <strong>Task: {task.title}</strong> 
+                      </p>
+                    </div>
+                    <p>{task.content}</p>
+                    <strong>Due: {formatDate(task.due_date)}</strong>
+                    <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                      <svg height="20" width="20">
+                        <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
+                      </svg>
+                      <p><strong>Status:</strong> {task.status}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </>
     )
   }
