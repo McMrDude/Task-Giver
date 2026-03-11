@@ -194,7 +194,7 @@ const [sentTasks, setSentTasks] = useState([]);
                 <button onClick={() => setView("tasks")}>Tasks</button>
             </div>
           </div>
-            <div style={{ flex: 1, display: "flex", justifyContent: "center", alignItems: "center", flexdirection: "column" }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexdirection: "column" }}>
               <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
               <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
 
