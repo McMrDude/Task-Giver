@@ -337,7 +337,7 @@ const [sentTasks, setSentTasks] = useState([]);
             </h3>
             <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center" }}>
               {sortedTasks.map(task => (
-                <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "200px", height: "200px", backgroundColor: "#101010"}}>
+                <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010"}}>
                   <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <p style={{ margin: "1px"}}>
                       <strong>From: {task.sender_name}</strong> 
