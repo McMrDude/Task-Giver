@@ -186,7 +186,7 @@ const [sentTasks, setSentTasks] = useState([]);
     return(
       <>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <div style={{position: "fixed", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
             <div className='backWrap'>
               <button onClick={() => setView("home")}>Home</button>
             </div>
