@@ -322,7 +322,7 @@ const [sentTasks, setSentTasks] = useState([]);
     return (
       <>
         <div style={{ display: "flex" }}>
-          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", border: "2px solid #008cff" }}>
             <div className='backWrap'>
                 <button onClick={() => setView("home")}>Home</button>
             </div>
@@ -332,7 +332,7 @@ const [sentTasks, setSentTasks] = useState([]);
           </div>
           <button onClick={toggleSort}>{sortMode === "newest" ? "Sort by Newest" : "Sort by Priority"}</button>
           {sortedTasks.length > 0 && (
-            <div className = "miniTaskDiv" style={{flexBasis: "90%", bottom: 20, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+            <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
                 Your Tasks:
               </h3>
