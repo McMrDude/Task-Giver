@@ -186,7 +186,7 @@ const [sentTasks, setSentTasks] = useState([]);
     return(
       <>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", flexBasis: "10%", border: "2px solid #008cff" }}>
+          <div style={{position: "sticky", top: "0", left: "0", height: "100vh", border: "2px solid #008cff" }}>
             <div className='backWrap'>
               <button onClick={() => setView("home")}>Home</button>
             </div>
@@ -194,7 +194,7 @@ const [sentTasks, setSentTasks] = useState([]);
                 <button onClick={() => setView("tasks")}>Tasks</button>
             </div>
           </div>
-            <div style={{ flexBasis: "90%" }}>
+            <div style={{ flex: 1 }}>
               <h1>Welcome {currentUser ? currentUser.name : "dipshit"}</h1>
               <h2>If all this text comes up then I AM TO GOOD AND I WILL BE DO BE DOING BE DO SMOKING METANFETAMIN BABY!!!</h2>
 
