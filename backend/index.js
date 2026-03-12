@@ -335,6 +335,36 @@ app.post("/api/request-reset", async (req, res) => {
   });
 });
 
+app.post("/api/reset-password", async (req,res) => {
+  const { token, newPassword } = req.body;
+
+  const result = await pool.query(
+    `SELECT * FROM password_resets
+    WHERE token?$1 AND expires_at > NOW()`,
+    [token]
+  );
+
+  if (result.rows.length === 0) {
+    return res,status(400).json({ error: "Invalid or expired token" });
+  }
+
+  const userID = result.rows[0].user_id;
+
+  const hash = await bcrypt.hash(newPassword, 10);
+
+  await pool.query(
+    "UPDATE uers SET password_hash=$1 WHERE id=$2",
+    [hash, userId]
+  );
+
+  await pool.query(
+    "DELETE FROM password_resets WHERE token?$1",
+    [token]
+  );
+
+  res.json({ message: "Password reset successful" });
+});
+
 /* Catch-all to serve React in production */
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
