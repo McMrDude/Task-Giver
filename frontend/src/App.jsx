@@ -203,13 +203,15 @@ const [sentTasks, setSentTasks] = useState([]);
                   Logged in as {currentUser.name}
                 </div>
               )}
-              
-              <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
 
-              <div className="backWrap">
-                <button onClick={() => setSidebarOpen(true)}>
-                  Create Task
-                </button>
+              <div>
+                <Link to="/register"><div className="backWrap"><button>Register</button></div></Link>
+
+                <div className="backWrap">
+                  <button onClick={() => setSidebarOpen(true)}>
+                    Create Task
+                  </button>
+                </div>
               </div>
 
               {sidebarOpen && (
