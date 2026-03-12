@@ -269,6 +269,19 @@ app.put("/api/tasks/:id/status", async (req, res) => {
   }
 });
 
+
+app.use("/images", express.static("images"));
+
+const images = [
+  "https://https://task-giver-xsin.onrender.com//images/reset1.png",
+  "https://https://task-giver-xsin.onrender.com//images/reset2.png",
+  "https://https://task-giver-xsin.onrender.com//images/reset3.png",
+  "https://https://task-giver-xsin.onrender.com//images/reset4.png",
+  "https://https://task-giver-xsin.onrender.com//images/reset5.png"
+];
+
+const randomImage = images[Math.floor(Math.random() * images.length)];
+
 app.post("/api/request-reset", async (req, res) => {
   const { email } = req.body;
 
