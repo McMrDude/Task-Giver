@@ -7,6 +7,8 @@ import cors from "cors";
 import bcrypt from "bcrypt";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
+import crypto from "crypto";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -41,6 +43,15 @@ const PgSession = pgSession(session);
 const sessionStore = new PgSession({
   pool: pool,
   tableName: "session"
+});
+
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
 });
 
 /* ------------------ MIDDLEWARE ------------------ */
@@ -256,6 +267,59 @@ app.put("/api/tasks/:id/status", async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Failed to update status" });
   }
+});
+
+app.post("/api/request-reset", async (req, res) => {
+  const { email } = req.body;
+
+  const result = await pool.query(
+    "SELECT id FROM users WHERE email=$1",
+    [email]
+  );
+
+  if (result.rows.length === 0) {
+    return res.json({
+      message: "If an account exists, a reset link has been sent."
+    });
+  }
+
+  const userId = result.rows[0].id;
+
+  const token = crypto.randomBytes(32).toString("hex");
+
+  await pool.query(
+    `INSERT INTO password_resets (user_id, token, expires_at)
+    VALUES ($1,$2,NOW() + INTERVAL '1 hour')`,
+    [userId, token]
+  );
+
+  const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
+  
+  await transporter.sendMail({
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Reset your password",
+    html: `
+    <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
+    
+    <p>Well here you go sport, click this link to reset your password champ:</p>
+    
+    <a href="${resetLink}">${resetLink}</a>
+
+    <img src="cid:resetimages" style="width:300px;">
+    `,
+    attachments: [
+      {
+        filename: "reset.png",
+        path: randomImage,
+        cid: "resetimage"
+      }
+    ]
+  });
+
+  res.json({
+    message: "If an account exists, a reset link has been sent."
+  });
 });
 
 /* Catch-all to serve React in production */
