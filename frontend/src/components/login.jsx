@@ -45,7 +45,7 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="login-container" style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
       <div className="backWrap" id='return'>
         <button
           onClick={() => navigate('/')}

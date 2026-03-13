@@ -27,7 +27,7 @@ export default function Forgot() {
   };
 
   return (
-    <div>
+    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
       <h2>Forgot Password</h2>
 
       <form onSubmit={handleSubmit}>

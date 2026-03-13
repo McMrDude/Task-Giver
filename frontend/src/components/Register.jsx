@@ -36,7 +36,7 @@ export default function Register() {
   }
 
   return (
-    <div style={{ padding: '20px', width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+    <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
       <div className="backWrap" id='return'>
         <button className="backButton" onClick={() => navigate('/')}>
           ← Back
