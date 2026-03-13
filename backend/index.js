@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -46,13 +46,7 @@ const sessionStore = new PgSession({
 });
 
 
-const transporter = nodemailer.createTransport({
-  service: 'Gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 /* ------------------ MIDDLEWARE ------------------ */
 app.set("trust proxy", 1);
@@ -280,59 +274,61 @@ const images = [
   "https://task-giver-xsin.onrender.com/images/reset5.png"
 ];
 
-const randomImage = images[Math.floor(Math.random() * images.length)];
-
 app.post("/api/request-reset", async (req, res) => {
-  const { email } = req.body;
+  try {
+    const { email } = req.body;
 
-  const result = await pool.query(
-    "SELECT id FROM users WHERE email=$1",
-    [email]
-  );
+    const result = await pool.query(
+      "SELECT id FROM users WHERE email=$1",
+      [email]
+    );
 
-  if (result.rows.length === 0) {
-    return res.json({
+    if (result.rows.length === 0) {
+      return res.json({
+        message: "If an account exists, a reset link has been sent."
+      });
+    }
+
+    const userId = result.rows[0].id;
+
+    const token = crypto.randomBytes(32).toString("hex");
+
+    await pool.query(
+      `INSERT INTO password_resets (user_id, token, expires_at)
+       VALUES ($1,$2,NOW() + INTERVAL '1 hour')`,
+      [userId, token]
+    );
+
+    const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
+
+    const randomImage =
+      images[Math.floor(Math.random() * images.length)];
+
+    await resend.emails.send({
+      from: "Task Giver <onboarding@resend.dev>",
+      to: email,
+      subject: "Reset your password",
+      html: `
+        <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
+
+        <p>Well here you go sport, click this link to reset your password champ:</p>
+
+        <a href="${resetLink}">${resetLink}</a>
+
+        <br><br>
+
+        <img src="${randomImage}" style="width:300px;">
+      `
+    });
+
+    res.json({
       message: "If an account exists, a reset link has been sent."
     });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
-
-  const userId = result.rows[0].id;
-
-  const token = crypto.randomBytes(32).toString("hex");
-
-  await pool.query(
-    `INSERT INTO password_resets (user_id, token, expires_at)
-    VALUES ($1,$2,NOW() + INTERVAL '1 hour')`,
-    [userId, token]
-  );
-
-  const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
-  
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: email,
-    subject: "Reset your password",
-    html: `
-    <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
-    
-    <p>Well here you go sport, click this link to reset your password champ:</p>
-    
-    <a href="${resetLink}">${resetLink}</a>
-
-    <img src="cid:resetimages" style="width:300px;">
-    `,
-    attachments: [
-      {
-        filename: "reset.png",
-        path: randomImage,
-        cid: "resetimage"
-      }
-    ]
-  });
-
-  res.json({
-    message: "If an account exists, a reset link has been sent."
-  });
 });
 
 app.post("/api/reset-password", async (req,res) => {
