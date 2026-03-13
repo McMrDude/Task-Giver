@@ -57,6 +57,7 @@ export default function Register() {
         <br />
 
         <input
+          type="email"
           id="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
