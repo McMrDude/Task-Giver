@@ -24,6 +24,13 @@ export default function ResetPassword() {
 
       const data = await res.json();
 
+      if (!res.ok) {
+        setMessage(data.error || 'Login failed');
+        return;
+      }
+
+      window.location.href = '/';
+
       setMessage(data.message);
     } catch (error) {
       console.error(error);
