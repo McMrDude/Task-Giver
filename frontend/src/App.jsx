@@ -95,7 +95,7 @@ function App() {
       default:
         return "white";
     }
-  };
+  }; 
 
   // Filter users in real time
   const filteredUsers = users.filter(user =>
