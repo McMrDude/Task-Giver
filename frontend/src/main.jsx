@@ -5,6 +5,7 @@ import App from './App.jsx'
 import Register from './components/Register.jsx'
 import Login from './components/login.jsx'
 import Forgot from './components/forgot-password.jsx'
+import Reset from './components/reset-password.jsx'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 
 createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
+        <Route path="/reset/:token" element={<Reset />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
