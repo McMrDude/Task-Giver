@@ -33,9 +33,11 @@ export default function Forgot() {
       <form onSubmit={handleSubmit}>
         <input
           type="email"
+          id="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          style={{ width: '200px', height: '30px' }}
           required
         />
 
