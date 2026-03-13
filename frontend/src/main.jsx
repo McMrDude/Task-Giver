@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgot" element={<Forgot />} />
-        <Route path="/reset/:token" element={<Reset />} />
+        <Route path="/reset-password/:token" element={<Reset />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>
