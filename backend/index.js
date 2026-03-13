@@ -336,7 +336,7 @@ app.post("/api/reset-password", async (req,res) => {
 
   const result = await pool.query(
     `SELECT * FROM password_resets
-    WHERE token?$1 AND expires_at > NOW()`,
+    WHERE token = $1 AND expires_at > NOW()`,
     [token]
   );
 
@@ -354,7 +354,7 @@ app.post("/api/reset-password", async (req,res) => {
   );
 
   await pool.query(
-    "DELETE FROM password_resets WHERE token?$1",
+    "DELETE FROM password_resets WHERE token = $1",
     [token]
   );
 
