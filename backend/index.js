@@ -296,16 +296,22 @@ app.post("/api/request-reset", async (req, res) => {
     const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    await send({
-      serviceId: process.env.EMAILJS_SERVICE_ID,
-      templateId: process.env.EMAILJS_TEMPLATE_ID,
-      userId: process.env.EMAILJS_PRIVATE_KEY, // this is your EmailJS Private Key
-      templateParams: {
-        reset_link: resetLink,
-        image: randomImage,
-        to_email: email
-      }
-    });
+    try {
+      const response = await send({
+        serviceId: process.env.EMAILJS_SERVICE_ID,
+        templateId: process.env.EMAILJS_TEMPLATE_ID,
+        userId: process.env.EMAILJS_PRIVATE_KEY,
+        templateParams: {
+          reset_link: resetLink,
+          image: randomImage,
+          to_email: email
+        }
+      });
+      console.log("EmailJS response:", response);
+    } catch (err) {
+      console.error("EmailJS send error:", err);
+      return res.status(500).json({ message: "Email sending failed" });
+    }
 
     res.json({ message: "If an account exists, a reset link has been sent." });
 
