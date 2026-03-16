@@ -308,7 +308,8 @@ app.post("/api/request-reset", async (req, res) => {
       from: "Task Giver <onboarding@resend.dev>",
       to: email,
       subject: "Reset your password",
-      html: `
+      text:`kom on bro, funk da. Link: ${resetLink}`
+      /* html: `
         <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
 
         <p>Well here you go sport, click this link to reset your password champ:</p>
@@ -318,7 +319,7 @@ app.post("/api/request-reset", async (req, res) => {
         <br><br>
 
         <img src="${randomImage}" style="width:300px;">
-      `
+      ` */
     });
 
     res.json({
