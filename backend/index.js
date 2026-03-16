@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import crypto from "crypto";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 const { Pool } = pkg;
@@ -45,8 +45,13 @@ const sessionStore = new PgSession({
   tableName: "session"
 });
 
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
 /* ------------------ MIDDLEWARE ------------------ */
 app.set("trust proxy", 1);
@@ -304,12 +309,11 @@ app.post("/api/request-reset", async (req, res) => {
     const randomImage =
       images[Math.floor(Math.random() * images.length)];
 
-    await resend.emails.send({
-      from: "Task Giver <onboarding@resend.dev>",
+    await transporter.sendMail({
+      from: `"Task Giver" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: "Reset your password",
-      text:`kom on bro, funk da. Link: ${resetLink}`
-      /* html: `
+      html: `
         <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
 
         <p>Well here you go sport, click this link to reset your password champ:</p>
@@ -319,7 +323,7 @@ app.post("/api/request-reset", async (req, res) => {
         <br><br>
 
         <img src="${randomImage}" style="width:300px;">
-      ` */
+      `
     });
 
     res.json({
