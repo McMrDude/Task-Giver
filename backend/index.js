@@ -304,7 +304,7 @@ app.post("/api/request-reset", async (req, res) => {
       const response = await send({
         serviceId: process.env.EMAILJS_SERVICE_ID,
         templateId: process.env.EMAILJS_TEMPLATE_ID,
-        userId: process.env.EMAILJS_PRIVATE_KEY,
+        userId: process.env.EMAILJS_PUBLIC_KEY,
         templateParams: {
           reset_link: resetLink,
           image: randomImage,
