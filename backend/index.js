@@ -296,6 +296,10 @@ app.post("/api/request-reset", async (req, res) => {
     const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
+    console.log("EMAILJS_SERVICE_ID:", process.env.EMAILJS_SERVICE_ID);
+    console.log("EMAILJS_TEMPLATE_ID:", process.env.EMAILJS_TEMPLATE_ID);
+    console.log("EMAILJS_PUBLIC_KEY:", process.env.EMAILJS_PUBLIC_KEY);
+    console.log("Template Params:", { reset_link: resetLink, image: randomImage, to_email: email });
     try {
       const response = await send({
         serviceId: process.env.EMAILJS_SERVICE_ID,
@@ -309,7 +313,7 @@ app.post("/api/request-reset", async (req, res) => {
       });
       console.log("EmailJS response:", response);
     } catch (err) {
-      console.error("EmailJS send error:", err);
+      console.error("EmailJS send error:", JSON.stringify(err, null, 2));
       return res.status(500).json({ message: "Email sending failed" });
     }
 
