@@ -10,8 +10,6 @@ import pgSession from "connect-pg-simple";
 import crypto from "crypto";
 import { send } from "@emailjs/nodejs";
 
-const emailClient = new EmailJS({ user: process.env.EMAILJS_USER_ID });
-
 dotenv.config();
 const { Pool } = pkg;
 
@@ -309,7 +307,7 @@ app.post("/api/request-reset", async (req, res) => {
     await send({
       serviceId: process.env.EMAILJS_SERVICE_ID,
       templateId: process.env.EMAILJS_TEMPLATE_ID,
-      userId: process.env.EMAILJS_PRIVATE_KEY,
+      userId: process.env.EMAILJS_PRIVATE_KEY, // this is your EmailJS Private Key
       templateParams: {
         reset_link: resetLink,
         image: randomImage,
