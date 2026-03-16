@@ -8,7 +8,7 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import crypto from "crypto";
-import EmailJS from "@emailjs/nodejs";
+import { send } from "@emailjs/nodejs";
 
 const emailClient = new EmailJS({ user: process.env.EMAILJS_USER_ID });
 
@@ -306,9 +306,10 @@ app.post("/api/request-reset", async (req, res) => {
     const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
     const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    await emailClient.send({
-      serviceId: process.env.EMAILJS_SERVICE_ID,   // from your email service
-      templateId: process.env.EMAILJS_TEMPLATE_ID, // from your template
+    await send({
+      serviceId: process.env.EMAILJS_SERVICE_ID,
+      templateId: process.env.EMAILJS_TEMPLATE_ID,
+      userId: process.env.EMAILJS_PRIVATE_KEY,
       templateParams: {
         reset_link: resetLink,
         image: randomImage,
