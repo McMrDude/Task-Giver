@@ -8,7 +8,9 @@ import bcrypt from "bcrypt";
 import session from "express-session";
 import pgSession from "connect-pg-simple";
 import crypto from "crypto";
-import nodemailer from "nodemailer";
+import EmailJS from "@emailjs/nodejs";
+
+const emailClient = new EmailJS({ user: process.env.EMAILJS_USER_ID });
 
 dotenv.config();
 const { Pool } = pkg;
@@ -289,46 +291,32 @@ app.post("/api/request-reset", async (req, res) => {
     );
 
     if (result.rows.length === 0) {
-      return res.json({
-        message: "If an account exists, a reset link has been sent."
-      });
+      return res.json({ message: "If an account exists, a reset link has been sent." });
     }
 
     const userId = result.rows[0].id;
-
     const token = crypto.randomBytes(32).toString("hex");
 
     await pool.query(
       `INSERT INTO password_resets (user_id, token, expires_at)
-       VALUES ($1,$2,NOW() + INTERVAL '1 hour')`,
+       VALUES ($1, $2, NOW() + INTERVAL '1 hour')`,
       [userId, token]
     );
 
     const resetLink = `https://task-giver-xsin.onrender.com/reset-password/${token}`;
+    const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    const randomImage =
-      images[Math.floor(Math.random() * images.length)];
-
-    await transporter.sendMail({
-      from: `"Task Giver" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Reset your password",
-      html: `
-        <p>You want to change your password huh? What, you gone and lost it? It went out to buy milk like your dad?</p>
-
-        <p>Well here you go sport, click this link to reset your password champ:</p>
-
-        <a href="${resetLink}">${resetLink}</a>
-
-        <br><br>
-
-        <img src="${randomImage}" style="width:300px;">
-      `
+    await emailClient.send({
+      serviceId: process.env.EMAILJS_SERVICE_ID,   // from your email service
+      templateId: process.env.EMAILJS_TEMPLATE_ID, // from your template
+      templateParams: {
+        reset_link: resetLink,
+        image: randomImage,
+        to_email: email
+      }
     });
 
-    res.json({
-      message: "If an account exists, a reset link has been sent."
-    });
+    res.json({ message: "If an account exists, a reset link has been sent." });
 
   } catch (error) {
     console.error(error);
