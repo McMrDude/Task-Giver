@@ -362,6 +362,34 @@ const [sentTasks, setSentTasks] = useState([]);
               </div>
             )}
           </div>
+          {selectedTask && (
+            <>
+              <div className='overlay show' onClick={() => setSelectedTask(null)} />
+              <div className='taskModal'>
+                <h2>{selectedTask.title}</h2>
+                <p><strong>From:</strong> {selectedTask.sender_name} </p>
+                <strong>Due: {formatDate(selectedTask.due_date)}</strong>
+                <p>{selectedTask.content}</p>
+                <div className="backWrap">
+                  <button onClick={() => setSelectedTask(null)}>close</button>
+                </div>
+                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
+                  <svg height="20" width="20">
+                    <circle cx="10" cy="10" r="7" fill={getStatusColor(selectedTask.status)} />
+                  </svg>
+                  <p><strong>Status:</strong> {selectedTask.status}</p>
+                </div>
+
+                {getNextStatus(selectedTask.status) && (
+                  <div className="backWrap">
+                    <button onClick={() => updateStatus(selectedTask)}>
+                      Move to {getNextStatus(selectedTask.status)}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </>
+          )}
         </div>
       </>
     )

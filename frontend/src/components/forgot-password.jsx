@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function Forgot() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
