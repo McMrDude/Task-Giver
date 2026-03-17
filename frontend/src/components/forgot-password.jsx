@@ -28,6 +28,11 @@ export default function Forgot() {
 
   return (
     <div style={{ width: "100vw", height: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <div className="backWrap" id='return'>
+        <button className="backButton" onClick={() => navigate('/')}>
+          ← Back
+        </button>
+      </div>
       <h2>Forgot Password</h2>
 
       <form onSubmit={handleSubmit}>

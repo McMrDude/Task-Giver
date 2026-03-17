@@ -243,7 +243,6 @@ const [sentTasks, setSentTasks] = useState([]);
                             <strong>Task: {task.title}</strong> 
                           </p>
                         </div>
-                        <p>{task.content}</p>
                         <strong>Due: {formatDate(task.due_date)}</strong>
                         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                           <svg height="20" width="20">
@@ -273,7 +272,6 @@ const [sentTasks, setSentTasks] = useState([]);
                             <strong>Task: {task.title}</strong> 
                           </p>
                         </div>
-                        <p>{task.content}</p>
                         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                           <svg height="20" width="20">
                             <circle cx="10" cy="10" r="7" fill={getStatusColor(task.status)} />
