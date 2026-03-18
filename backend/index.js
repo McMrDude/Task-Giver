@@ -118,7 +118,7 @@ app.get("/api/my-tasks", async (req, res) => {
       `SELECT m.*, u.name as sender_name
        FROM tasks m
        JOIN users u ON m.sender_id = u.id
-       WHERE receiver_id = $1 AND status != 'completed'
+       WHERE receiver_id = $1 
        ORDER BY created_at DESC`,
       [req.session.user.id]
     );
