@@ -118,7 +118,7 @@ app.get("/api/my-tasks", async (req, res) => {
       `SELECT m.*, u.name as sender_name
        FROM tasks m
        JOIN users u ON m.sender_id = u.id
-       WHERE receiver_id = $1 
+       WHERE receiver_id = $1 AND status != 'completed'
        ORDER BY created_at DESC`,
       [req.session.user.id]
     );
@@ -130,7 +130,7 @@ app.get("/api/my-tasks", async (req, res) => {
   }
 });
 
-/* app.get("/api/completed-tasks", async (req, res) => {
+app.get("/api/completed-tasks", async (req, res) => {
   try {
     if (!req.session.user) {
       return res.status(401).json({ error: "Not logged in" });
@@ -150,7 +150,7 @@ app.get("/api/my-tasks", async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch completed tasks" });
   }
-}); */
+});
 
 app.get("/api/sent-tasks", async (req, res) => {
   try {
