@@ -118,7 +118,7 @@ app.get("/api/my-tasks", async (req, res) => {
       `SELECT m.*, u.name as sender_name
        FROM tasks m
        JOIN users u ON m.sender_id = u.id
-       WHERE receiver_id = $1
+       WHERE receiver_id = $1 AND status != 'completed'
        ORDER BY created_at DESC`,
       [req.session.user.id]
     );
@@ -127,6 +127,28 @@ app.get("/api/my-tasks", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Failed to fetch tasks" });
+  }
+});
+
+app.get("/api/completed-tasks", async (req, res) => {
+  try {
+    if (!req.session.user) {
+      return res.status(401).json({ error: "Not logged in" });
+    }
+
+    const result = await pool.query(
+      `SELECT t.*, u.name as sender_name
+       FROM tasks t
+       JOIN users u ON t.sender_id = u.id
+       WHERE receiver_id = $1 AND status = 'completed'
+       ORDER BY created_at DESC`,
+      [req.session.user.id]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to fetch completed tasks" });
   }
 });
 

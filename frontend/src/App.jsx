@@ -117,7 +117,19 @@ function App() {
       .catch(err => console.error(err));
   }, []);
 
+  const [taskView, setTaskView] = useState("active"); // "active" or "completed"
   const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+  const url =
+    taskView === "active"
+      ? "/api/my-tasks"
+      : "/api/completed-tasks";
+
+  fetch(url, { credentials: "include" })
+    .then(res => res.json())
+    .then(data => setTasks(data));
+}, [taskView]);
 
   const toggleSort = () => {
     if (sortMode === "newest") {
@@ -331,6 +343,13 @@ const [sentTasks, setSentTasks] = useState([]);
             </div>
           </div>
           <div>
+            <button onClick={() => setTaskView("active")}>
+              Active Tasks
+            </button>
+
+            <button onClick={() => setView("completed")}>
+              Completed Tasks
+            </button>
             <button onClick={toggleSort}>{sortMode === "newest" ? "Sorted by Newest" : "Sorted by Priority"}</button>
             {sortedTasks.length > 0 && (
               <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, width: "100%", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
