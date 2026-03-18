@@ -287,9 +287,16 @@ app.post("/api/request-reset", async (req, res) => {
     const userId = result.rows[0].id;
     const token = crypto.randomBytes(32).toString("hex");
 
+    // delete old tokens for this user
+    await pool.query(
+      "DELETE FROM password_resets WHERE user_id = $1",
+      [userId]
+    );
+
+    // insert new one
     await pool.query(
       `INSERT INTO password_resets (user_id, token, expires_at)
-       VALUES ($1, $2, NOW() + INTERVAL '1 hour')`,
+      VALUES ($1, $2, NOW() + INTERVAL '1 hour')`,
       [userId, token]
     );
 
@@ -356,6 +363,17 @@ app.post("/api/reset-password", async (req,res) => {
 
   res.json({ message: "Password reset successful" });
 });
+
+setInterval(async () => {
+  try {
+    const result = await pool.query(
+      "DELETE FROM password_resets WHERE expires_at < NOW()"
+    );
+    console.log(`🧹 Deleted ${result.rowCount} expired tokens`);
+  } catch (err) {
+    console.error("Cleanup error:", err);
+  }
+}, 1000 * 60 * 10); // every 10 minutes
 
 /* Catch-all to serve React in production */
 app.get("*", (req, res) => {
