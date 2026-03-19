@@ -128,7 +128,13 @@ function App() {
 
   fetch(url, { credentials: "include" })
     .then(res => res.json())
-    .then(data => setTasks(data));
+    .then(data => {
+      if (Array.isArray(data)) {
+            setTasks(data);
+          } else {
+            setTasks([]);
+          }
+    });
 }, [taskView]);
 
   const toggleSort = () => {
