@@ -347,7 +347,7 @@ const [sentTasks, setSentTasks] = useState([]);
               Active Tasks
             </button>
 
-            <button onClick={() => setView("completed")}>
+            <button onClick={() => setTaskView("completed")}>
               Completed Tasks
             </button>
             <button onClick={toggleSort}>{sortMode === "newest" ? "Sorted by Newest" : "Sorted by Priority"}</button>
