@@ -362,7 +362,7 @@ const [sentTasks, setSentTasks] = useState([]);
                 <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
                   Your Tasks:
                 </h3>
-                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center" }}>
+                <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center", width: "100%" }}>
                   {sortedTasks.map(task => (
                     <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010"}}>
                       <div style={{ display: 'flex', flexDirection: 'column' }}>
