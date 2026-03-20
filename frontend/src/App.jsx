@@ -371,7 +371,7 @@ const [sentTasks, setSentTasks] = useState([]);
             </button>
             <button onClick={toggleSort}>{sortMode === "newest" ? "Sorted by Newest" : "Sorted by Priority"}</button>
             {sortedTasks.length > 0 && (
-              <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch" }}>
+              <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, display: "flex", flexDirection: "column", justifyContent: "flex-start", alignItems: "stretch", width: "82vw" }}>
                 <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
                   Your Tasks:
                 </h3>
