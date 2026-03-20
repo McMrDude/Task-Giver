@@ -358,13 +358,13 @@ const [sentTasks, setSentTasks] = useState([]);
             </button>
             <button onClick={toggleSort}>{sortMode === "newest" ? "Sorted by Newest" : "Sorted by Priority"}</button>
             {sortedTasks.length > 0 && (
-              <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "stretch" }}>
+              <div className = "miniTaskDiv" style={{flex: 1, bottom: 20, display: "flex", flexDirection: "column", justifyContent: "flex-start" }}>
                 <h3 style={{ border: "blue solid 2px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px", width: 110, marginBottom: 0, borderBottom: "none" }}>
                   Your Tasks:
                 </h3>
                 <div style={{ display: "flex", gap: "10px", flexWrap: "wrap", flexDirection: "column", justifyContent: "center", width: "100%" }}>
                   {sortedTasks.map(task => (
-                    <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010"}}>
+                    <div onClick={() => setSelectedTask(task)} key={task.id} style={{ border: "2px solid blue", borderRadius: 20, width: "100%", height: "200px", backgroundColor: "#101010", display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
                       <div style={{ display: 'flex', flexDirection: 'column' }}>
                         <p style={{ margin: "1px"}}>
                           <strong>From: {task.sender_name}</strong> 
@@ -373,7 +373,13 @@ const [sentTasks, setSentTasks] = useState([]);
                           <strong>Task: {task.title}</strong> 
                         </p>
                       </div>
-                      <p>{task.content}</p>
+                      <p style={{
+                        overflow: "hidden",
+                        textOverflow: "ellipsis",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical"
+                      }}>{task.content}</p>
                       <strong>Due: {formatDate(task.due_date)}</strong>
                       <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center" }}>
                         <svg height="20" width="20">
