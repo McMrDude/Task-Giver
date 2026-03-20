@@ -74,6 +74,7 @@ function App() {
       .then(res => res.json())
       .then(data => {
         setTasks(data);
+        setHomeTasks(data); 
         // if the modal is open, try to keep the selectedTask in sync with the latest data
         if (selectedTask) {
           const updated = data.find(t => t.id === selectedTask.id);
@@ -119,6 +120,18 @@ function App() {
 
   const [taskView, setTaskView] = useState("completed"); // "active" or "completed"
   const [tasks, setTasks] = useState([]);
+  const [homeTasks, setHomeTasks] = useState([]);
+  useEffect(() => {
+  fetch("/api/my-tasks", { credentials: "include" })
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data)) {
+        setHomeTasks(data);
+      } else {
+        setHomeTasks([]);
+      }
+    });
+}, []);
 
   useEffect(() => {
   const url =
@@ -165,7 +178,7 @@ function App() {
     );
   }
 
-  const firstTasks = tasks.slice(0, 5); // get first 5 tasks for the home view
+  const firstTasks = homeTasks.slice(0, 5); // get first 5 tasks for the home view
 
   /* useEffect(() => {
     const fetchTasks = () => {
