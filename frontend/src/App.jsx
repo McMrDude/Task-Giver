@@ -118,7 +118,7 @@ function App() {
       .catch(err => console.error(err));
   }, []);
 
-  const [taskView, setTaskView] = useState("completed"); // "active" or "completed"
+  const [taskView, setTaskView] = useState("active"); // "active" or "completed"
   const [tasks, setTasks] = useState([]);
   const [homeTasks, setHomeTasks] = useState([]);
   useEffect(() => {
