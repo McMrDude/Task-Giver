@@ -134,7 +134,8 @@ button:focus-visible {
   gap: 10px;
   flex-wrap: wrap;
   flex-direction: row;
-  justify-content: center;
+  justify-Content: "flex-start"; 
+  align-Items: "stretch";
   cursor: pointer;
 }
 
