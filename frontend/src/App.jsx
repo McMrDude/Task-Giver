@@ -349,11 +349,11 @@ const [sentTasks, setSentTasks] = useState([]);
             </div>
           </div>
           <div style={{ flex: 1 }}>
-            <button onClick={() => setTaskView("active")}>
+            <button onClick={() => { setTaskView("active"); console.log("TASK VIEW:", taskView); console.log("TASKS:", tasks); }}>
               Active Tasks
             </button>
 
-            <button onClick={() => setTaskView("completed")}>
+            <button onClick={() => { setTaskView("completed"); console.log("TASK VIEW:", taskView); console.log("TASKS:", tasks); }}>
               Completed Tasks
             </button>
             <button onClick={toggleSort}>{sortMode === "newest" ? "Sorted by Newest" : "Sorted by Priority"}</button>
